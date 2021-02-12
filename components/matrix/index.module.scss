@@ -1,0 +1,17 @@
+.matrixContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .matrixTitle {
+    font-size: 18px;
+  }
+
+  .squareContainer {
+    display: flex;
+
+    .square {
+      padding: 20px;
+    }
+  }
+}
