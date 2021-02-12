@@ -1,12 +1,14 @@
 .navbarContainer {
   display: flex;
   padding: 5px;
+  background-color: lightblue;
+  margin-bottom: 30px;
 
   .navbarTitle {
-    margin-right: 20px;
+    margin-right: 10px;
   }
 
   .navbarItem {
-    margin-right: 5px;
+    margin-right: 10px;
   }
 }

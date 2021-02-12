@@ -7,16 +7,28 @@
     font-size: 18px;
   }
 
+  .matrixContainer {
+    display: flex;
+  }
+
   .squareContainer {
     display: flex;
 
-    .square {
+    @mixin square {
       display: flex;
       justify-content: center;
       height: 28px;
       width: 28px;
-      background-color: lightblue;
+
       border: 2px rgb(138, 204, 226) solid;
+    }
+    .unprocessedSquare {
+      @include square;
+      background-color: lightblue;
+    }
+    .processedSquare {
+      @include square;
+      background-color: lightcoral;
     }
   }
 }
