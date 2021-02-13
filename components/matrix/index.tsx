@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
 
-import { Square } from './index.dataTypes';
-import { useMediaQuery } from './index.hooks';
 import styles from './index.module.scss';
 
 export const Matrix = () => {
@@ -62,11 +60,6 @@ export const Matrix = () => {
 
       {processList.length}
 
-      {/* {processList.map((id) => (
-        <div>{id}</div>
-      ))} */}
-
-      {/* A grid that holds all of the squares. */}
       <div className={styles.squareContainer}>
         {matrix.map((row) => (
           <div className={styles.row}>
