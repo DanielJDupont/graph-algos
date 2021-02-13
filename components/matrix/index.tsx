@@ -28,6 +28,15 @@ export const Matrix = () => {
     );
   };
 
+  const displayResults = () => {
+    /*
+    The plan here is for our depth first search to have added some number like 100ms, 200ms, 300ms...
+    As animation play delays on a library like framer motion, or a more modern one.
+
+    So the animation library will just display the entire grid all at once and it will automatically animate everything.
+    */
+  };
+
   const depthFirstSearch = async (i: number, j: number) => {
     // Ensure that the current grid square we are on is defined at i and j.
     if (i >= 0 && i < matrix.length) {
