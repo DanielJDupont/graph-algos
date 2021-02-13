@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
+import anime from 'animejs';
+import Anime from './anime';
 
 import styles from './index.module.scss';
 
@@ -14,6 +16,8 @@ export const Matrix = () => {
       }))
     )
   );
+
+  useEffect(() => {}, []);
 
   const resetMatrix = () => {
     setProcessList([]);
@@ -59,6 +63,18 @@ export const Matrix = () => {
   return (
     <div className={styles.matrixContainer}>
       <div className={styles.matrixTitle}>Square Grid</div>
+
+      <div className={styles.container}>
+        <Anime
+          className={styles.container}
+          scale={[0.1, 0.9]}
+          delay={anime.stagger(50)}
+        >
+          {[...Array(600)].map(() => (
+            <div className={styles.red} />
+          ))}
+        </Anime>
+      </div>
 
       <div className={styles.buttonContainer}>
         <button onClick={() => depthFirstSearch(0, 0)}>
