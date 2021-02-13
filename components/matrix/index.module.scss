@@ -13,22 +13,27 @@
 
   .squareContainer {
     display: flex;
+    flex-direction: column;
 
-    @mixin square {
+    .row {
       display: flex;
-      justify-content: center;
-      height: 28px;
-      width: 28px;
 
-      border: 2px rgb(138, 204, 226) solid;
-    }
-    .unprocessedSquare {
-      @include square;
-      background-color: lightblue;
-    }
-    .processedSquare {
-      @include square;
-      background-color: lightcoral;
+      @mixin square {
+        display: flex;
+        justify-content: center;
+        height: 28px;
+        width: 28px;
+
+        border: 2px rgb(138, 204, 226) solid;
+      }
+      .unprocessedSquare {
+        @include square;
+        background-color: lightblue;
+      }
+      .processedSquare {
+        @include square;
+        background-color: lightcoral;
+      }
     }
   }
 }

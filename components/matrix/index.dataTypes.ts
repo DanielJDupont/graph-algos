@@ -6,4 +6,5 @@
 export interface Square {
   id: string;
   isProcessed: boolean;
+  isDisplayed: boolean;
 }
