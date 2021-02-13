@@ -1,23 +1,19 @@
 import React, { Fragment, Component } from 'react';
-import { AnimeProps } from './index.dataTypes';
-import anime from 'animejs';
+import anime, { AnimeParams } from 'animejs';
 
-if (typeof window !== 'undefined') {
-  const animejs = require('animejs');
+interface AllProps extends AnimeParams {
+  children: React.ReactNode;
+  svg?: boolean;
 }
 
-const PREFIX = '__anime__';
-
 export class Anime extends Component {
-  props: AnimeProps;
-
+  props: AllProps;
   targets: any[];
   targetRefs: any[];
   anime: any;
 
-  constructor(props: AnimeProps) {
+  constructor(props: AnimeParams) {
     super(props);
-
     // Current Anime DOM Targets
     this.targets = [];
     this.targetRefs = [];
@@ -25,10 +21,6 @@ export class Anime extends Component {
   }
 
   componentDidMount() {
-    this.createAnime();
-  }
-
-  componentDidUpdate() {
     this.createAnime();
   }
 
@@ -64,7 +56,7 @@ export class Anime extends Component {
           refs.push(React.createRef());
           const El = this.props.svg ? 'g' : 'div';
           return (
-            <El ref={refs[refs.length - 1]} key={`${PREFIX}${i}`}>
+            <El ref={refs[refs.length - 1]} key={`${'__anime__'}${i}`}>
               {child}
             </El>
           );
