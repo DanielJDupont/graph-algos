@@ -66,9 +66,10 @@ export const Matrix = () => {
 
       <div className={styles.container}>
         <Anime
+          loop
           className={styles.container}
           scale={[{ value: 0.1 }, 0.9]}
-          delay={anime.stagger(50)}
+          delay={anime.stagger(10)}
         >
           {[...Array(600)].map(() => (
             <div className={styles.red} />
