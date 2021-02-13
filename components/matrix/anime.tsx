@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment, Component, useEffect } from 'react';
 import anime, { AnimeParams } from 'animejs';
 
 interface AllProps extends AnimeParams {
@@ -6,65 +6,62 @@ interface AllProps extends AnimeParams {
   svg?: boolean;
 }
 
-export class Anime extends Component {
-  props: AllProps;
-  targets: any[];
-  targetRefs: any[];
-  anime: any;
+export const Anime = (props: AllProps) => {
+  let targets = [];
+  let targetRefs = [];
+  let _anime = null;
 
-  constructor(props: AnimeParams) {
-    super(props);
-    // Current Anime DOM Targets
-    this.targets = [];
-    this.targetRefs = [];
-    this.anime = null;
-  }
+  // UseEffect to component mount run createAnime() function.
 
-  componentDidMount() {
-    this.createAnime();
-  }
+  useEffect(() => {
+    createAnime();
+  }, []);
 
-  createAnime = () => {
-    let props = this.props;
-    if (this.targets.length > 0 && this.anime !== undefined) {
-      anime.remove(this.targets);
+  const createAnime = () => {
+    if (targets.length > 0 && anime !== undefined) {
+      _anime.remove(targets);
     }
 
-    this.targets = [];
-    for (let ref of this.targetRefs) {
+    // Attach the targetRefs to targets.
+    targets = [];
+    for (let ref of targetRefs) {
       if (ref.current) {
-        this.targets.push(ref.current);
+        targets.push(ref.current);
       }
     }
 
-    let animeProps = { ...props, targets: this.targets };
+    // Mutable pattern, replace this with const.
+    let animeProps = { ...props, targets: targets };
+
+    // Delete the property of children from the anime props.
     delete animeProps.children;
+    // Delete the property of children from the svg.
     delete animeProps.svg;
-    this.anime = anime(animeProps);
+
+    // Create an instance of anime with the anime() constructor and store it to anime, little confusing.
+    _anime = anime(animeProps);
   };
 
   // Render children, and their diffs until promise of anime finishes.
-  render() {
-    const children = Array.isArray(this.props.children)
-      ? this.props.children
-      : [this.props.children];
-    const refs = this.targetRefs;
+  const children = Array.isArray(props.children)
+    ? props.children
+    : [props.children];
+  const refs = targetRefs;
 
-    return (
-      <Fragment>
-        {children.map((child, i) => {
-          refs.push(React.createRef());
-          const El = this.props.svg ? 'g' : 'div';
-          return (
-            <El ref={refs[refs.length - 1]} key={`${'__anime__'}${i}`}>
-              {child}
-            </El>
-          );
-        })}
-      </Fragment>
-    );
-  }
-}
+  return (
+    <Fragment>
+      {children.map((child, i) => {
+        refs.push(React.createRef());
+        const El = props.svg ? 'g' : 'div';
+        return (
+          <El ref={refs[refs.length - 1]} key={`${'__anime__'}${i}`}>
+            {child}
+          </El>
+        );
+      })}
+    </Fragment>
+  );
+};
 
 export default Anime;
 export { anime };
