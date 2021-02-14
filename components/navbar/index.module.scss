@@ -1,14 +1,26 @@
 .navbarContainer {
   display: flex;
-  padding: 5px;
-  background-color: lightblue;
+  align-items: center;
+  height: 60px;
+  background-color: #3276d2;
   margin-bottom: 30px;
 
+  .menuButton {
+    color: white;
+    margin: 0 10px;
+  }
+
   .navbarTitle {
-    margin-right: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 20px;
   }
 
   .navbarItem {
     margin-right: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
   }
 }
