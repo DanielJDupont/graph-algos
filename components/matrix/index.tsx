@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
-import clsx from 'clsx';
 import anime from 'animejs';
+import clsx from 'clsx';
+
 import Anime from './anime';
+
+import { Button } from '@material-ui/core';
 
 import styles from './index.module.scss';
 
@@ -78,10 +81,12 @@ export const Matrix = () => {
       </div>
 
       <div className={styles.buttonContainer}>
-        <button onClick={() => depthFirstSearch(0, 0)}>
+        <Button color="primary" onClick={() => depthFirstSearch(0, 0)}>
           Run Depth First Search
-        </button>
-        <button onClick={() => resetMatrix()}>Reset Matrix</button>
+        </Button>
+        <Button color="primary" onClick={() => resetMatrix()}>
+          Reset Matrix
+        </Button>
       </div>
 
       {processList.length}
