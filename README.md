@@ -1,6 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Interactive Graph Algorithm Visualizer
 
-## Getting Started
+## To View On Your Local Machine
 
 First, run the development server:
 
@@ -10,21 +10,12 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to try out the app.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Featuring a React wrapper for anime.js
 
-## Learn More
+Based upon improving the existing anime.js react wrappers currently on npm.
 
-To learn more about Next.js, take a look at the following resources:
+The goal of this wrapper is to have lots of documented examples you can use in React quickly, and to be as easy and as general as possible for anyone to use in any product.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Written with @types/animejs support for all of us TypeScript users and with modern TypeScript immutable functional programing practices in React.
