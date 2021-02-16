@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import anime from 'animejs';
 import clsx from 'clsx';
 
-import Anime from './anime';
+import Anime from 'react-anime-wrapper';
 
 import { Button } from '@material-ui/core';
 
