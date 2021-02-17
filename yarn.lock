@@ -1889,7 +1889,7 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-"react-anime-wrapper@link:../react-animejs-wrapper":
+"react-animejs-wrapper@link:../react-animejs-wrapper":
   version "0.0.0"
   uid ""
 
@@ -1976,6 +1976,10 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+"rollup-practice@link:../react-animejs-wrapper":
+  version "0.0.0"
+  uid ""
 
 safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@^5.2.0, safe-buffer@~5.2.0:
   version "5.2.1"
