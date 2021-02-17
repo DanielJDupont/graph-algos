@@ -16,7 +16,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "sass": "^1.32.7",
-    "react-anime-wrapper": "link:/home/dan/Desktop/react-animejs-wrapper"
+    "react-anime-wrapper": "link:/home/dan/Desktop/react-animejs-wrapper",
+    "rollup-practice": "link:/home/dan/Desktop/rollup-practice"
   },
   "devDependencies": {
     "@types/node": "^14.14.25",

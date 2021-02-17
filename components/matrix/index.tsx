@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import anime from 'animejs';
 import clsx from 'clsx';
-import Anime from 'react-anime-wrapper';
+// import Anime from 'react-anime-wrapper';
+import Rollup from 'rollup-practice';
 
 import { Button } from '@material-ui/core';
 
@@ -66,8 +67,10 @@ export const Matrix = () => {
     <div className={styles.matrixContainer}>
       <div className={styles.matrixTitle}>Square Grid</div>
 
+      <Rollup />
+
       <div className={styles.container}>
-        <Anime
+        {/* <Anime
           loop
           className={styles.container}
           scale={[{ value: 0.1 }, 1]}
@@ -76,7 +79,7 @@ export const Matrix = () => {
           {[...Array(600)].map(() => (
             <div className={styles.red} />
           ))}
-        </Anime>
+        </Anime> */}
       </div>
 
       <div className={styles.buttonContainer}>
