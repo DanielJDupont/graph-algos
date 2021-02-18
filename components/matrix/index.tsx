@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import anime from 'animejs';
+import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import Anime from 'rollup-practice';
 
@@ -62,10 +61,20 @@ export const Matrix = () => {
     return;
   };
 
+  const animatedSquaresRef = useRef(null);
+
+  const restart = () => {
+    if (animatedSquaresRef) {
+      animatedSquaresRef.current.restart();
+    }
+  };
+
   return (
     <div className={styles.matrixContainer}>
+      <button onClick={restart}>Reset Animation</button>
       <div className={styles.matrixTitle}>Square Grid</div>
       <Anime
+        ref={animatedSquaresRef}
         animeConfig={{
           translateX: 250,
           delay: function (_, i) {
@@ -77,32 +86,11 @@ export const Matrix = () => {
           autoplay: true,
         }}
       >
-        <div className={styles.element} />
-        <div className={styles.element} />
-        <div className={styles.element} />
-        <div className={styles.element} />
+        <div className={styles.element}>1</div>
+        <div className={styles.element}>2</div>
+        <div className={styles.element}>3</div>
       </Anime>
-      <Anime
-        animeConfig={{
-          translateX: 250,
-          delay: function (_, i) {
-            return i * 100;
-          },
-          loop: true,
-          direction: 'alternate',
-          easing: 'easeInOutSine',
-          autoplay: true,
-        }}
-      >
-        <div className={styles.element} />
-        <div className={styles.element} />
-        <div className={styles.element} />
-        <div className={styles.element} />
-        <div className={styles.element} />
-        <div className={styles.element} />
-        <div className={styles.element} />
-      </Anime>
-      - - -
+
       <div className={styles.buttonContainer}>
         <Button color="primary" onClick={() => depthFirstSearch(0, 0)}>
           Run Depth First Search
