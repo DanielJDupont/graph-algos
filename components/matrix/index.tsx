@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import anime from 'animejs';
 import clsx from 'clsx';
-// import Anime from 'react-animejs-wrapper';
 import Rollup from 'rollup-practice';
 
 import { Button } from '@material-ui/core';

@@ -1889,10 +1889,6 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-"react-animejs-wrapper@link:../react-animejs-wrapper":
-  version "0.0.0"
-  uid ""
-
 react-dom@17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.1.tgz#1de2560474ec9f0e334285662ede52dbc5426fc6"
@@ -1977,7 +1973,7 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-"rollup-practice@link:../react-animejs-wrapper":
+"rollup-practice@link:../rollup-practice":
   version "0.0.0"
   uid ""
 
