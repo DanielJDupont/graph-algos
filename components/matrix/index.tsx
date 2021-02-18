@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import anime from 'animejs';
 import clsx from 'clsx';
-import Rollup from 'rollup-practice';
+import Anime from 'rollup-practice';
 
 import { Button } from '@material-ui/core';
 
@@ -65,22 +65,44 @@ export const Matrix = () => {
   return (
     <div className={styles.matrixContainer}>
       <div className={styles.matrixTitle}>Square Grid</div>
-
-      <Rollup />
-
-      <div className={styles.container}>
-        {/* <Anime
-          loop
-          className={styles.container}
-          scale={[{ value: 0.1 }, 1]}
-          delay={anime.stagger(10)}
-        >
-          {[...Array(600)].map(() => (
-            <div className={styles.red} />
-          ))}
-        </Anime> */}
-      </div>
-
+      <Anime
+        animeConfig={{
+          translateX: 250,
+          delay: function (_, i) {
+            return i * 100;
+          },
+          loop: true,
+          direction: 'alternate',
+          easing: 'easeInOutSine',
+          autoplay: true,
+        }}
+      >
+        <div className={styles.element} />
+        <div className={styles.element} />
+        <div className={styles.element} />
+        <div className={styles.element} />
+      </Anime>
+      <Anime
+        animeConfig={{
+          translateX: 250,
+          delay: function (_, i) {
+            return i * 100;
+          },
+          loop: true,
+          direction: 'alternate',
+          easing: 'easeInOutSine',
+          autoplay: true,
+        }}
+      >
+        <div className={styles.element} />
+        <div className={styles.element} />
+        <div className={styles.element} />
+        <div className={styles.element} />
+        <div className={styles.element} />
+        <div className={styles.element} />
+        <div className={styles.element} />
+      </Anime>
+      - - -
       <div className={styles.buttonContainer}>
         <Button color="primary" onClick={() => depthFirstSearch(0, 0)}>
           Run Depth First Search
@@ -89,9 +111,7 @@ export const Matrix = () => {
           Reset Matrix
         </Button>
       </div>
-
       {processList.length}
-
       <div className={styles.squareContainer}>
         {matrix.map((row) => (
           <div className={styles.row}>
