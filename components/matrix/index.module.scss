@@ -4,5 +4,22 @@
 
   .matrixContainer {
     display: flex;
+    flex-direction: column;
+
+    .row {
+      display: flex;
+
+      .element {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 35px;
+        width: 35px;
+        background-color: #8ecaff;
+        margin: 2px;
+        color: #53aefd;
+      }
+    }
   }
 }

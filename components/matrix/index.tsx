@@ -7,7 +7,6 @@ import { Button } from '@material-ui/core';
 import styles from './index.module.scss';
 
 export const Matrix = () => {
-  const [processList, setProcessList] = useState([]);
   const [matrix, setMatrix] = useState(
     [...Array(20)].map((_, i) =>
       [...Array(30)].map((_, j) => ({
@@ -17,6 +16,7 @@ export const Matrix = () => {
       }))
     )
   );
+  const [processList, setProcessList] = useState([]);
 
   useEffect(() => {}, []);
 
@@ -41,7 +41,17 @@ export const Matrix = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.matrixContainer}>Square Grid</div>
+      <div className={styles.matrixContainer}>
+        {matrix.map((row, key) => (
+          <div className={styles.row} key={key}>
+            {row.map((col, key) => (
+              <div className={styles.element} key={key}>
+                {key}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
