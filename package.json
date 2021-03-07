@@ -16,7 +16,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "sass": "^1.32.7",
-    "rollup-practice": "link:/home/dan/Desktop/rollup-practice"
+    "react-animejs-wrapper": "1.0.21"
   },
   "resolutions": {
     "**/react": "^17.0.1",
