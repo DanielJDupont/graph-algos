@@ -7,26 +7,28 @@ import { Button } from '@material-ui/core';
 import styles from './index.module.scss';
 
 export const Matrix = () => {
+  // Track the user selected start and end square by in a single variable.
+  const [startSquareID, setStartSquareID] = useState('0 0');
+  const [endSquareID, setEndSquareID] = useState('5 5');
+
+  // This matrix is used for performing computations.
   const [matrix, setMatrix] = useState(
     [...Array(20)].map((_, i) =>
       [...Array(30)].map((_, j) => ({
         id: i + ' ' + j,
         isProcessed: false,
-        isDisplayed: false,
       }))
     )
   );
-  const [processList, setProcessList] = useState([]);
-
-  useEffect(() => {}, []);
 
   const depthFirstSearch = async (i: number, j: number) => {
     // Ensure that the current grid square we are on is defined at i and j.
     if (i >= 0 && i < matrix.length) {
       if (j >= 0 && j < matrix[i].length) {
+        // We have already processed this square.
         if (matrix[i][j].isProcessed) return;
-        matrix[i][j].isProcessed = true;
 
+        matrix[i][j].isProcessed = true;
         setProcessList((oldList) => [...oldList, matrix[i][j].id]);
 
         // Travel top, right, bottom, left
@@ -39,16 +41,45 @@ export const Matrix = () => {
     return;
   };
 
+  // 1D List of the order in which the square IDs were visited from first to last.
+  const [processList, setProcessList] = useState([]);
+
+  // Now recreate the matrix with each element having the correct time delay.
+  const displayMatrix = matrix.map((row) =>
+    row.map((square) => {
+      return {
+        id: square.id,
+        delay: processList.findIndex((id) => id === square.id) * 200,
+      };
+    })
+  );
+
+  console.log('PROCESS LIST');
+  console.log(processList);
+
+  console.log('DISPLAY MATRIX');
+  console.log(displayMatrix);
+
   return (
     <div className={styles.container}>
+      <Button onClick={() => depthFirstSearch(0, 0)}>Depth First Search</Button>
       <div className={styles.matrixContainer}>
         {matrix.map((row, key) => (
           <div className={styles.row} key={key}>
-            {row.map((col, key) => (
-              <div className={styles.element} key={key}>
-                {key}
-              </div>
-            ))}
+            {row.map((square) => {
+              return (
+                <div
+                  className={clsx(
+                    styles.normalSquare,
+                    square.id === startSquareID && styles.startSquare,
+                    square.id === endSquareID && styles.endSquare
+                  )}
+                  key={square.id}
+                >
+                  {key}
+                </div>
+              );
+            })}
           </div>
         ))}
       </div>
