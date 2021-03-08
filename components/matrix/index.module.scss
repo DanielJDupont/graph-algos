@@ -50,6 +50,7 @@
 
       .normalSquare {
         @include square;
+        position: relative;
       }
 
       .startSquare {
@@ -88,5 +89,39 @@
         border: 1px solid rgb(85, 85, 85);
       }
     }
+  }
+}
+
+.greySquare {
+  animation-name: wallAnimation;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  width: 32px;
+  height: 32px;
+}
+
+@keyframes wallAnimation {
+  0% {
+    transform: scale(0.2);
+    background-color: rgb(42, 57, 77);
+    border-radius: 20px;
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: rgb(68, 93, 124);
+    border-radius: 10px;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(48, 64, 85);
+    border: 2px solid rgb(48, 64, 85);
+    border-radius: 0px;
   }
 }

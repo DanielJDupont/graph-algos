@@ -156,8 +156,7 @@ export const Matrix = () => {
                     className={clsx(
                       styles.normalSquare,
                       square.id === startSquareID && styles.startSquare,
-                      square.id === endSquareID && styles.endSquare,
-                      square.isProcessed && styles.blockedSquare
+                      square.id === endSquareID && styles.endSquare
                     )}
                     onClick={() => setStartSquareID(square.id)}
                     onMouseEnter={(mouseEvent) => {
@@ -184,7 +183,11 @@ export const Matrix = () => {
                       }
                     }}
                     key={square.id}
-                  ></div>
+                  >
+                    {square.isProcessed && (
+                      <div className={styles.greySquare}></div>
+                    )}
+                  </div>
                 );
               })}
             </div>
