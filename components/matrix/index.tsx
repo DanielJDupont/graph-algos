@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { BaseSyntheticEvent, SyntheticEvent, useState } from 'react';
 import clsx from 'clsx';
 import Anime from 'react-animejs-wrapper';
 
 import { Button, Select, MenuItem } from '@material-ui/core';
 
 import styles from './index.module.scss';
+import { Mouse } from '@material-ui/icons';
 
 enum AlgorithmChoice {
   ChooseYourAlgorithm = 'ChooseYourAlgorithm',
@@ -12,11 +13,22 @@ enum AlgorithmChoice {
   BreadthFirstSearch = 'BreadthFirstSearch',
 }
 
+enum MouseMode {
+  // Can click and drag to set the starting position.
+  StartingPoint,
+  // Can click and drag to set the ending position.
+  EndingPoint,
+  // Can click and drag to create walls, or if the element is already a wall, remove the wall.
+  NormalPoint,
+}
+
 export const Matrix = () => {
   // Track the user selected start and end square by in a single variable.
   const [isDisplayingAlgorithm, setIsDisplayingAlgorithm] = useState(false);
   const [startSquareID, setStartSquareID] = useState('0 0');
   const [endSquareID, setEndSquareID] = useState('5 5');
+
+  const [mouseMode, setMouseMode] = useState<MouseMode>(MouseMode.NormalPoint);
   const [algorithmChoice, setAlgorithmChoice] = useState<AlgorithmChoice>(
     AlgorithmChoice.ChooseYourAlgorithm
   );
@@ -51,6 +63,8 @@ export const Matrix = () => {
     return;
   };
 
+  const handleMouseDownDragOver = (mouseEvent) => {};
+
   // 1D List of the order in which the square IDs were visited from first to last.
   const [processList, setProcessList] = useState([]);
 
@@ -84,14 +98,49 @@ export const Matrix = () => {
           </Select>
 
           <Button
+            className={clsx(
+              styles.button,
+              mouseMode === MouseMode.StartingPoint && styles.buttonActive
+            )}
+            variant="contained"
+            onClick={() => {
+              if (mouseMode !== MouseMode.StartingPoint) {
+                setMouseMode(MouseMode.StartingPoint);
+              } else if (mouseMode === MouseMode.StartingPoint) {
+                setMouseMode(MouseMode.NormalPoint);
+              }
+            }}
+          >
+            Starting Point
+          </Button>
+
+          <Button
+            className={clsx(
+              styles.button,
+              mouseMode === MouseMode.EndingPoint && styles.buttonActive
+            )}
+            variant="contained"
+            onClick={() => {
+              if (mouseMode !== MouseMode.EndingPoint) {
+                setMouseMode(MouseMode.EndingPoint);
+              } else if (mouseMode === MouseMode.EndingPoint) {
+                setMouseMode(MouseMode.NormalPoint);
+              }
+            }}
+          >
+            Ending Point
+          </Button>
+
+          <Button
             className={styles.button}
+            style={{ marginLeft: '20px' }}
             variant="contained"
             onClick={() => {
               depthFirstSearch(0, 0);
               setIsDisplayingAlgorithm(true);
             }}
           >
-            Start
+            Start Animation
           </Button>
         </div>
       </div>
@@ -109,9 +158,16 @@ export const Matrix = () => {
                       square.id === startSquareID && styles.startSquare,
                       square.id === endSquareID && styles.endSquare
                     )}
+                    onClick={() => setStartSquareID(square.id)}
+                    onMouseEnter={(mouseEvent) => {
+                      // If the user is entering the square while holding down the left mouse button.
+                      if (mouseEvent.buttons === 1) {
+                        setEndSquareID(square.id);
+                      }
+                    }}
                     key={square.id}
                   >
-                    {key}
+                    {square.id}
                   </div>
                 );
               })}
