@@ -162,7 +162,11 @@ export const Matrix = () => {
                     onMouseEnter={(mouseEvent) => {
                       // If the user is entering the square while holding down the left mouse button.
                       if (mouseEvent.buttons === 1) {
-                        setEndSquareID(square.id);
+                        if (mouseMode === MouseMode.EndingPoint) {
+                          setEndSquareID(square.id);
+                        } else if (mouseMode === MouseMode.StartingPoint) {
+                          setStartSquareID(square.id);
+                        }
                       }
                     }}
                     key={square.id}
