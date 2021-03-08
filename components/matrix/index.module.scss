@@ -3,6 +3,27 @@
   flex-direction: column;
   align-items: center;
 
+  .buttonWrapper {
+    display: flex;
+    justify-content: center;
+    width: 95%;
+
+    .buttonRow {
+      display: flex;
+      justify-content: center;
+      background-color: #53aefd;
+      padding: 20px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 800px;
+
+      .button {
+        text-transform: none !important;
+      }
+    }
+  }
+
   .matrixContainer {
     display: flex;
     flex-direction: column;
@@ -20,6 +41,7 @@
         background-color: #8ecaff;
         margin: 2px;
         color: #53aefd;
+        font-size: 10px;
       }
 
       .normalSquare {

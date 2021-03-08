@@ -1,15 +1,25 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
 import Anime from 'react-animejs-wrapper';
 
-import { Button } from '@material-ui/core';
+import { Button, Select, MenuItem } from '@material-ui/core';
 
 import styles from './index.module.scss';
 
+enum AlgorithmChoice {
+  ChooseYourAlgorithm = 'ChooseYourAlgorithm',
+  DepthFirstSearch = 'DepthFirstSearch',
+  BreadthFirstSearch = 'BreadthFirstSearch',
+}
+
 export const Matrix = () => {
   // Track the user selected start and end square by in a single variable.
+  const [isDisplayingAlgorithm, setIsDisplayingAlgorithm] = useState(false);
   const [startSquareID, setStartSquareID] = useState('0 0');
   const [endSquareID, setEndSquareID] = useState('5 5');
+  const [algorithmChoice, setAlgorithmChoice] = useState<AlgorithmChoice>(
+    AlgorithmChoice.ChooseYourAlgorithm
+  );
 
   // This matrix is used for performing computations.
   const [matrix, setMatrix] = useState(
@@ -49,55 +59,114 @@ export const Matrix = () => {
     row.map((square) => {
       return {
         id: square.id,
-        delay: processList.findIndex((id) => id === square.id) * 200,
+        delay: processList.findIndex((id) => id === square.id) * 50 + 200,
       };
     })
   );
 
-  console.log('PROCESS LIST');
-  console.log(processList);
-
-  console.log('DISPLAY MATRIX');
-  console.log(displayMatrix);
-
   return (
     <div className={styles.container}>
-      <Button onClick={() => depthFirstSearch(0, 0)}>Depth First Search</Button>
-      <div className={styles.matrixContainer}>
-        {matrix.map((row, key) => (
-          <div className={styles.row} key={key}>
-            {row.map((square) => {
-              return (
-                <div
-                  className={clsx(
-                    styles.normalSquare,
-                    square.id === startSquareID && styles.startSquare,
-                    square.id === endSquareID && styles.endSquare
-                  )}
-                  key={square.id}
-                >
-                  {key}
-                </div>
-              );
-            })}
-          </div>
-        ))}
+      <div className={styles.buttonWrapper}>
+        <div className={styles.buttonRow}>
+          <Select
+            value={algorithmChoice}
+            onChange={(event: any) => setAlgorithmChoice(event.target.value)}
+          >
+            <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
+              Choose Your Algorithm
+            </MenuItem>
+            <MenuItem value={AlgorithmChoice.DepthFirstSearch}>
+              Depth First Search
+            </MenuItem>
+            <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>
+              Breadth First Search
+            </MenuItem>
+          </Select>
+
+          <Button
+            className={styles.button}
+            variant="contained"
+            onClick={() => {
+              depthFirstSearch(0, 0);
+              setIsDisplayingAlgorithm(true);
+            }}
+          >
+            Start
+          </Button>
+        </div>
       </div>
+
+      {!isDisplayingAlgorithm ? (
+        <div className={styles.matrixContainer}>
+          {/* Input matrix */}
+          {matrix.map((row, key) => (
+            <div className={styles.row} key={key}>
+              {row.map((square) => {
+                return (
+                  <div
+                    className={clsx(
+                      styles.normalSquare,
+                      square.id === startSquareID && styles.startSquare,
+                      square.id === endSquareID && styles.endSquare
+                    )}
+                    key={square.id}
+                  >
+                    {key}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={styles.matrixContainer}>
+          {/* Display Matrix */}
+          {displayMatrix.map((row, key) => (
+            <div className={styles.row} key={key}>
+              {row.map((square) => {
+                return (
+                  <Anime
+                    style={{
+                      backgroundColor: 'lightgrey',
+                      width: '35px',
+                      height: '35px',
+                    }}
+                    config={{
+                      keyframes: [
+                        {
+                          scale: [0.1, 0.6],
+                          rotate: '+=1turn',
+                          backgroundColor: '#FFF',
+                          borderRadius: ['0%', '10%'],
+                          easing: 'spring(1, 100, 12, 0)',
+                        },
+                        {
+                          scale: [0.6, 0.7],
+                          backgroundColor: '#ff7e7e',
+                          borderRadius: ['0%', '30%'],
+                          easing: 'spring(1, 100, 12, 0)',
+                        },
+                        {
+                          scale: [0.6, 0.7],
+                          backgroundColor: '#82ffac',
+                          borderRadius: ['0%', '10%'],
+                          easing: 'spring(1, 100, 12, 0)',
+                        },
+                      ],
+                      duration: 1000,
+                      delay: square.delay,
+                    }}
+                  >
+                    <div className={styles.normalSquare} key={square.id}>
+                      {square.delay}
+                    </div>
+                  </Anime>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
-
-/*
-Phase 1: User Input, the user may select the start and the user may select the end.
-The data structure for the matrix must be decided upon.
-The last square to be selected must be selectable.
-The finishing square must be selected as well.
-There must be buttons to start the traversal as well.
-
-Phase 2: Calculate the order in which all squares are visited, giving them numbers from 1 to n.
-We then must have an idea of what the data structure will be, probably the same as above but with a field for tracking visited.
-
-Phase 3: Show the traversal. 
-To do this make a new matrix but with <Anime></Anime> tags for each element, with delays set to 200ms * visited.
-You can simply traverse everything 1 time in O(n) time to construct the new matrix.
-*/
