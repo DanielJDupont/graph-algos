@@ -78,6 +78,11 @@
             rgb(145, 145, 145) 100%
           );
       }
+
+      .blockedSquare {
+        @include square;
+        background-color: rgb(85, 85, 85);
+      }
     }
   }
 }

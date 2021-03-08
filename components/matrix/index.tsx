@@ -148,15 +148,16 @@ export const Matrix = () => {
       {!isDisplayingAlgorithm ? (
         <div className={styles.matrixContainer}>
           {/* Input matrix */}
-          {matrix.map((row, key) => (
-            <div className={styles.row} key={key}>
+          {matrix.map((row, rowIndex) => (
+            <div className={styles.row} key={rowIndex}>
               {row.map((square) => {
                 return (
                   <div
                     className={clsx(
                       styles.normalSquare,
                       square.id === startSquareID && styles.startSquare,
-                      square.id === endSquareID && styles.endSquare
+                      square.id === endSquareID && styles.endSquare,
+                      square.isProcessed && styles.blockedSquare
                     )}
                     onClick={() => setStartSquareID(square.id)}
                     onMouseEnter={(mouseEvent) => {
@@ -166,6 +167,19 @@ export const Matrix = () => {
                           setEndSquareID(square.id);
                         } else if (mouseMode === MouseMode.StartingPoint) {
                           setStartSquareID(square.id);
+                        } else {
+                          setMatrix(
+                            matrix.map((row) =>
+                              row.map((_square) => {
+                                if (_square.id === square.id) {
+                                  return {
+                                    id: _square.id,
+                                    isProcessed: !square.isProcessed,
+                                  };
+                                } else return _square;
+                              })
+                            )
+                          );
                         }
                       }
                     }}
