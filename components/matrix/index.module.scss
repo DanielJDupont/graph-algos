@@ -55,6 +55,7 @@
       .startSquare {
         @include square;
         background-color: green;
+        border: 1px solid green;
       }
 
       .endSquare {
@@ -77,6 +78,7 @@
             rgb(145, 145, 145) 75%,
             rgb(145, 145, 145) 100%
           );
+        border: 1px solid rgb(145, 145, 145) !important;
       }
 
       .blockedSquare {
