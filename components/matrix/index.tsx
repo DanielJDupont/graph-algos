@@ -184,9 +184,7 @@ export const Matrix = () => {
                       }
                     }}
                     key={square.id}
-                  >
-                    {square.id}
-                  </div>
+                  ></div>
                 );
               })}
             </div>
