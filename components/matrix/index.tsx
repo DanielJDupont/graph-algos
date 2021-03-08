@@ -201,33 +201,23 @@ export const Matrix = () => {
                 return (
                   <Anime
                     style={{
-                      backgroundColor: 'lightgrey',
                       width: '35px',
                       height: '35px',
                     }}
                     config={{
                       keyframes: [
                         {
-                          scale: [0.1, 0.6],
-                          rotate: '+=1turn',
-                          backgroundColor: '#FFF',
-                          borderRadius: ['0%', '10%'],
-                          easing: 'spring(1, 100, 12, 0)',
+                          scale: [0, 1],
+                          backgroundColor: ['#36456d', '#6c88d6'],
+                          borderRadius: ['40%', '0%'],
+                          easing: 'spring(1, 30, 10, 0)',
                         },
+
                         {
-                          scale: [0.6, 0.7],
-                          backgroundColor: '#ff7e7e',
-                          borderRadius: ['0%', '30%'],
-                          easing: 'spring(1, 100, 12, 0)',
-                        },
-                        {
-                          scale: [0.6, 0.7],
-                          backgroundColor: '#82ffac',
-                          borderRadius: ['0%', '10%'],
-                          easing: 'spring(1, 100, 12, 0)',
+                          backgroundColor: ['#6c88d6', '#5161f3'],
+                          easing: 'spring(1, 30, 10, 0)',
                         },
                       ],
-                      duration: 1000,
                       delay: square.delay,
                     }}
                   >

@@ -41,9 +41,9 @@
         align-items: center;
         height: 35px;
         width: 35px;
-        background-color: #8ecaff;
-        margin: 2px;
+        background-color: rgb(234, 250, 255);
         color: #53aefd;
+        border: 1px solid #96ceff;
         font-size: 10px;
         user-select: none;
       }
@@ -81,7 +81,9 @@
 
       .blockedSquare {
         @include square;
+        color: rgb(61, 61, 61);
         background-color: rgb(85, 85, 85);
+        border: 1px solid rgb(85, 85, 85);
       }
     }
   }
