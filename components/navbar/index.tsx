@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { MatrixContext } from '../matrix/matrixContext';
+import { MatrixContext } from '../matrixContext';
 
 import styles from './index.module.scss';
 

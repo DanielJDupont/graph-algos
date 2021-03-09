@@ -1,4 +1,4 @@
-import { MatrixProvider } from '../components/matrix/matrixContext';
+import { MatrixProvider } from '../components/matrixContext';
 
 import '../styles/globals.css';
 
