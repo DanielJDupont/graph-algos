@@ -1,37 +1,18 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import Anime from 'react-animejs-wrapper';
+
+import { depthFirstSearch } from './algorithms';
+import {
+  AlgorithmChoice,
+  AnimatedSquare,
+  MouseMode,
+  Square,
+} from './dataTypes';
+
 import { Button, Select, MenuItem } from '@material-ui/core';
+
 import styles from './index.module.scss';
-
-enum AlgorithmChoice {
-  ChooseYourAlgorithm = 'ChooseYourAlgorithm',
-  DepthFirstSearch = 'DepthFirstSearch',
-  BreadthFirstSearch = 'BreadthFirstSearch',
-}
-
-enum MouseMode {
-  // Can click and drag to set the starting position.
-  StartingPoint,
-  // Can click and drag to set the ending position.
-  EndingPoint,
-  // Can click and drag to create walls, or if the element is already a wall, remove the wall.
-  NormalPoint,
-}
-
-export interface Square {
-  id: string;
-  isProcessed: boolean;
-  isBlocked: boolean;
-}
-
-export interface AnimatedSquare {
-  id: string;
-  isProcessed: boolean;
-  animated: boolean;
-  isBlocked: boolean;
-  delay: number;
-}
 
 export const Matrix = () => {
   // Track the user selected start and end square by in a single variable.
@@ -55,25 +36,6 @@ export const Matrix = () => {
       }))
     )
   );
-
-  const depthFirstSearch = async (i: number, j: number) => {
-    if (i >= 0 && i < matrix.length) {
-      if (j >= 0 && j < matrix[i].length) {
-        // We have already processed this square.
-        if (matrix[i][j].isProcessed) return;
-
-        matrix[i][j].isProcessed = true;
-        setProcessList((oldList) => [...oldList, matrix[i][j].id]);
-
-        // Travel top, right, bottom, left
-        depthFirstSearch(i - 1, j);
-        depthFirstSearch(i, j + 1);
-        depthFirstSearch(i + 1, j);
-        depthFirstSearch(i, j - 1);
-      }
-    }
-    return;
-  };
 
   // 1D List of the order in which the square IDs were visited from first to last.
   const [processList, setProcessList] = useState([]);
@@ -161,7 +123,9 @@ export const Matrix = () => {
             onClick={() => {
               depthFirstSearch(
                 parseInt(startSquareID.split(' ')[0]),
-                parseInt(startSquareID.split(' ')[1])
+                parseInt(startSquareID.split(' ')[1]),
+                matrix,
+                setProcessList
               );
               setIsDisplayingAlgorithm(true);
             }}
@@ -170,7 +134,6 @@ export const Matrix = () => {
           </Button>
         </div>
       </div>
-
       {!isDisplayingAlgorithm ? (
         <div className={styles.matrixContainer}>
           {/* Input Matrix */}
