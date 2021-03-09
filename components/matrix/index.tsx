@@ -102,6 +102,7 @@ export const Matrix = () => {
     <div className={styles.container}>
       <div className={styles.buttonWrapper}>
         <div className={styles.buttonRow}>
+          {startSquareID}
           <Select
             value={algorithmChoice}
             onChange={(event: any) => setAlgorithmChoice(event.target.value)}
@@ -252,7 +253,7 @@ export const Matrix = () => {
           {displayMatrix.map((row, key) => (
             <div className={styles.row} key={key}>
               {row.map((square) => {
-                if (square.animated) {
+                if (square.animated && square.id !== startSquareID) {
                   return (
                     <Anime
                       style={{
@@ -282,6 +283,10 @@ export const Matrix = () => {
                   );
                 } else if (square.isBlocked) {
                   return <div className={styles.blockedSquare} />;
+                } else if (square.id === endSquareID) {
+                  return <div className={styles.endSquare} />;
+                } else if (square.id === startSquareID) {
+                  return <div className={styles.startSquare} />;
                 } else {
                   return <div className={styles.normalSquare} />;
                 }
