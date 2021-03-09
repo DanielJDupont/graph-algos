@@ -147,7 +147,7 @@ export const Matrix = () => {
 
       {!isDisplayingAlgorithm ? (
         <div className={styles.matrixContainer}>
-          {/* Input matrix */}
+          {/* Input Matrix */}
           {matrix.map((row, rowIndex) => (
             <div className={styles.row} key={rowIndex}>
               {row.map((square) => {
@@ -158,7 +158,33 @@ export const Matrix = () => {
                       square.id === startSquareID && styles.startSquare,
                       square.id === endSquareID && styles.endSquare
                     )}
-                    onClick={() => setStartSquareID(square.id)}
+                    onMouseDown={() => {
+                      // Click to set the start square only if start square button is set.
+                      if (mouseMode === MouseMode.StartingPoint) {
+                        setStartSquareID(square.id);
+                      }
+
+                      // Click to set the end square only if the ending point button is clicked.
+                      else if (mouseMode === MouseMode.EndingPoint) {
+                        setEndSquareID(square.id);
+                      }
+
+                      // Click to remove individual dark grey squares.
+                      else {
+                        setMatrix(
+                          matrix.map((row) =>
+                            row.map((_square) => {
+                              if (_square.id === square.id) {
+                                return {
+                                  id: _square.id,
+                                  isProcessed: !square.isProcessed,
+                                };
+                              } else return _square;
+                            })
+                          )
+                        );
+                      }
+                    }}
                     onMouseEnter={(mouseEvent) => {
                       // If the user is entering the square while holding down the left mouse button.
                       if (mouseEvent.buttons === 1) {
@@ -185,7 +211,7 @@ export const Matrix = () => {
                     key={square.id}
                   >
                     {square.isProcessed && (
-                      <div className={styles.greySquare}></div>
+                      <div className={styles.greySquare} />
                     )}
                   </div>
                 );
@@ -195,7 +221,7 @@ export const Matrix = () => {
         </div>
       ) : (
         <div className={styles.matrixContainer}>
-          {/* Display Matrix */}
+          {/* Display Matrix with Animation */}
           {displayMatrix.map((row, key) => (
             <div className={styles.row} key={key}>
               {row.map((square) => {
