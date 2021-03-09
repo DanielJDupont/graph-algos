@@ -8,7 +8,7 @@ import {
   AnimatedSquare,
   MouseMode,
   Square,
-} from './dataTypes';
+} from '../dataTypes';
 
 import { Button, Select, MenuItem } from '@material-ui/core';
 
