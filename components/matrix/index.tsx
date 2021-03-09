@@ -64,7 +64,6 @@ export const Matrix = () => {
     <div className={styles.container}>
       <div className={styles.buttonWrapper}>
         <div className={styles.buttonRow}>
-          {startSquareID}
           <Select
             value={algorithmChoice}
             onChange={(event: any) => setAlgorithmChoice(event.target.value)}
