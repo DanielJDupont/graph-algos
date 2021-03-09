@@ -22,7 +22,15 @@ enum MouseMode {
 export interface Square {
   id: string;
   isProcessed: boolean;
-  animated: false;
+  isBlocked: boolean;
+}
+
+export interface AnimatedSquare {
+  id: string;
+  isProcessed: boolean;
+  animated: boolean;
+  isBlocked: boolean;
+  delay: number;
 }
 
 export const Matrix = () => {
@@ -43,6 +51,7 @@ export const Matrix = () => {
         id: i + ' ' + j,
         isProcessed: false,
         animated: false,
+        isBlocked: false,
       }))
     )
   );
@@ -76,13 +85,15 @@ export const Matrix = () => {
   );
 
   // Now recreate the matrix with each element having the correct time delay.
-  const displayMatrix = matrix.map((row) =>
+  const displayMatrix: AnimatedSquare[][] = matrix.map((row) =>
     row.map((square) => {
       return {
         id: square.id,
-        delay: filteredProcessList.findIndex((id) => id === square.id) * 50,
         animated:
           filteredProcessList.findIndex((id) => id === square.id) * 50 >= 0,
+        isBlocked: square.isBlocked,
+        isProcessed: square.isProcessed,
+        delay: filteredProcessList.findIndex((id) => id === square.id) * 50,
       };
     })
   );
@@ -190,7 +201,7 @@ export const Matrix = () => {
                                 return {
                                   id: _square.id,
                                   isProcessed: !square.isProcessed,
-                                  animated: _square.animated,
+                                  isBlocked: !square.isBlocked,
                                 };
                               } else return _square;
                             })
@@ -213,7 +224,7 @@ export const Matrix = () => {
                                   return {
                                     id: _square.id,
                                     isProcessed: !square.isProcessed,
-                                    animated: square.animated,
+                                    isBlocked: !square.isBlocked,
                                   };
                                 } else return _square;
                               })
@@ -268,6 +279,8 @@ export const Matrix = () => {
                       </div>
                     </Anime>
                   );
+                } else if (square.isBlocked) {
+                  return <div className={styles.blockedSquare} />;
                 } else {
                   return <div className={styles.normalSquare} />;
                 }
