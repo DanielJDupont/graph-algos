@@ -1,11 +1,8 @@
-import { BaseSyntheticEvent, SyntheticEvent, useState } from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
 import Anime from 'react-animejs-wrapper';
-
 import { Button, Select, MenuItem } from '@material-ui/core';
-
 import styles from './index.module.scss';
-import { Mouse } from '@material-ui/icons';
 
 enum AlgorithmChoice {
   ChooseYourAlgorithm = 'ChooseYourAlgorithm',
@@ -22,6 +19,12 @@ enum MouseMode {
   NormalPoint,
 }
 
+export interface Square {
+  id: string;
+  isProcessed: boolean;
+  animated: false;
+}
+
 export const Matrix = () => {
   // Track the user selected start and end square by in a single variable.
   const [isDisplayingAlgorithm, setIsDisplayingAlgorithm] = useState(false);
@@ -34,17 +37,17 @@ export const Matrix = () => {
   );
 
   // This matrix is used for performing computations.
-  const [matrix, setMatrix] = useState(
+  const [matrix, setMatrix] = useState<Square[][]>(
     [...Array(20)].map((_, i) =>
       [...Array(30)].map((_, j) => ({
         id: i + ' ' + j,
         isProcessed: false,
+        animated: false,
       }))
     )
   );
 
   const depthFirstSearch = async (i: number, j: number) => {
-    // Ensure that the current grid square we are on is defined at i and j.
     if (i >= 0 && i < matrix.length) {
       if (j >= 0 && j < matrix[i].length) {
         // We have already processed this square.
@@ -63,17 +66,23 @@ export const Matrix = () => {
     return;
   };
 
-  const handleMouseDownDragOver = (mouseEvent) => {};
-
   // 1D List of the order in which the square IDs were visited from first to last.
   const [processList, setProcessList] = useState([]);
+
+  // Delete all squares that occur after the end square.
+  const filteredProcessList = processList.slice(
+    0,
+    processList.findIndex((squareID) => endSquareID === squareID)
+  );
 
   // Now recreate the matrix with each element having the correct time delay.
   const displayMatrix = matrix.map((row) =>
     row.map((square) => {
       return {
         id: square.id,
-        delay: processList.findIndex((id) => id === square.id) * 50 + 200,
+        delay: filteredProcessList.findIndex((id) => id === square.id) * 50,
+        animated:
+          filteredProcessList.findIndex((id) => id === square.id) * 50 >= 0,
       };
     })
   );
@@ -136,7 +145,10 @@ export const Matrix = () => {
             style={{ marginLeft: '20px' }}
             variant="contained"
             onClick={() => {
-              depthFirstSearch(0, 0);
+              depthFirstSearch(
+                parseInt(startSquareID.split(' ')[0]),
+                parseInt(startSquareID.split(' ')[1])
+              );
               setIsDisplayingAlgorithm(true);
             }}
           >
@@ -178,6 +190,7 @@ export const Matrix = () => {
                                 return {
                                   id: _square.id,
                                   isProcessed: !square.isProcessed,
+                                  animated: _square.animated,
                                 };
                               } else return _square;
                             })
@@ -200,6 +213,7 @@ export const Matrix = () => {
                                   return {
                                     id: _square.id,
                                     isProcessed: !square.isProcessed,
+                                    animated: square.animated,
                                   };
                                 } else return _square;
                               })
@@ -225,34 +239,38 @@ export const Matrix = () => {
           {displayMatrix.map((row, key) => (
             <div className={styles.row} key={key}>
               {row.map((square) => {
-                return (
-                  <Anime
-                    style={{
-                      width: '35px',
-                      height: '35px',
-                    }}
-                    config={{
-                      keyframes: [
-                        {
-                          scale: [0, 1],
-                          backgroundColor: ['#36456d', '#6c88d6'],
-                          borderRadius: ['40%', '0%'],
-                          easing: 'spring(1, 30, 10, 0)',
-                        },
+                if (square.animated) {
+                  return (
+                    <Anime
+                      style={{
+                        width: '35px',
+                        height: '35px',
+                      }}
+                      config={{
+                        keyframes: [
+                          {
+                            scale: [0, 1],
+                            backgroundColor: ['#36456d', '#6c88d6'],
+                            borderRadius: ['40%', '0%'],
+                            easing: 'spring(1, 30, 10, 0)',
+                          },
 
-                        {
-                          backgroundColor: ['#6c88d6', '#5161f3'],
-                          easing: 'spring(1, 30, 10, 0)',
-                        },
-                      ],
-                      delay: square.delay,
-                    }}
-                  >
-                    <div className={styles.normalSquare} key={square.id}>
-                      {square.delay}
-                    </div>
-                  </Anime>
-                );
+                          {
+                            backgroundColor: ['#6c88d6', '#5161f3'],
+                            easing: 'spring(1, 30, 10, 0)',
+                          },
+                        ],
+                        delay: square.delay,
+                      }}
+                    >
+                      <div className={styles.normalSquare} key={square.id}>
+                        {square.delay}
+                      </div>
+                    </Anime>
+                  );
+                } else {
+                  return <div className={styles.normalSquare} />;
+                }
               })}
             </div>
           ))}
