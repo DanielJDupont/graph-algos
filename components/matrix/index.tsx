@@ -109,9 +109,11 @@ export const Matrix = () => {
             <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
               Choose Your Algorithm
             </MenuItem>
+
             <MenuItem value={AlgorithmChoice.DepthFirstSearch}>
               Depth First Search
             </MenuItem>
+
             <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>
               Breadth First Search
             </MenuItem>
@@ -259,6 +261,7 @@ export const Matrix = () => {
                       }}
                       config={{
                         keyframes: [
+                          {},
                           {
                             scale: [0, 1],
                             backgroundColor: ['#36456d', '#6c88d6'],
@@ -274,9 +277,7 @@ export const Matrix = () => {
                         delay: square.delay,
                       }}
                     >
-                      <div className={styles.normalSquare} key={square.id}>
-                        {square.delay}
-                      </div>
+                      <div className={styles.normalSquare} key={square.id} />
                     </Anime>
                   );
                 } else if (square.isBlocked) {
