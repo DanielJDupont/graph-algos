@@ -1,14 +1,18 @@
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import { useContext } from 'react';
+
+import { MatrixContext } from '../matrix/matrixContext';
 
 import styles from './index.module.scss';
 
 export const Navbar = () => {
+  const { mouseMode } = useContext(MatrixContext);
+
   return (
     <div className={styles.navbarContainer}>
       <div className={styles.navbarTitle}>
         Interactive Graph Algorithm Visualizer
       </div>
+      {mouseMode}
     </div>
   );
 };

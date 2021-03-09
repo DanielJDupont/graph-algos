@@ -1,7 +1,14 @@
-import '../styles/globals.css'
+import { MatrixProvider } from '../components/matrix/matrixContext';
+
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    // Any of the children components of this provider can now get the value.
+    <MatrixProvider>
+      <Component {...pageProps} />
+    </MatrixProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
