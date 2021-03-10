@@ -20,10 +20,12 @@ export const Navbar = () => {
     mouseMode,
     setMouseMode,
     startSquareID,
+    isDisplayingAlgorithm,
     setIsDisplayingAlgorithm,
     algorithmChoice,
     setAlgorithmChoice,
     matrix,
+    setMatrix,
     setProcessList,
   } = useContext(MatrixContext);
 
@@ -36,6 +38,7 @@ export const Navbar = () => {
       <Select
         className={styles.selector}
         value={algorithmChoice}
+        disabled={isDisplayingAlgorithm}
         onChange={(event: any) => {
           setAlgorithmChoice(event.target.value);
           console.log(event.target.value);
@@ -59,6 +62,7 @@ export const Navbar = () => {
           styles.button,
           mouseMode === MouseMode.StartingPoint && styles.buttonActive
         )}
+        disabled={isDisplayingAlgorithm}
         variant="contained"
         onClick={() => {
           if (mouseMode !== MouseMode.StartingPoint) {
@@ -77,6 +81,7 @@ export const Navbar = () => {
           styles.button,
           mouseMode === MouseMode.EndingPoint && styles.buttonActive
         )}
+        disabled={isDisplayingAlgorithm}
         variant="contained"
         onClick={() => {
           if (mouseMode !== MouseMode.EndingPoint) {
@@ -93,6 +98,10 @@ export const Navbar = () => {
       <Button
         className={styles.button}
         variant="contained"
+        disabled={
+          algorithmChoice === AlgorithmChoice.ChooseYourAlgorithm ||
+          isDisplayingAlgorithm
+        }
         onClick={() => {
           if (algorithmChoice === AlgorithmChoice.BreadthFirstSearch) {
             breadthFirstSearch(
@@ -119,8 +128,19 @@ export const Navbar = () => {
 
       <Button
         className={clsx(styles.button)}
+        disabled={!isDisplayingAlgorithm}
         variant="contained"
-        onClick={() => {}}
+        onClick={() => {
+          // Wipe out the matrix so nothing is processed anymore.
+          setMatrix(
+            matrix.map((row) =>
+              row.map((square) => {
+                return { ...square, isProcessed: false };
+              })
+            )
+          );
+          setIsDisplayingAlgorithm(false);
+        }}
       >
         <ReplayOutlined className={styles.icon} />
         Reset

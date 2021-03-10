@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export enum AlgorithmChoice {
   ChooseYourAlgorithm = 'ChooseYourAlgorithm',
   DepthFirstSearch = 'DepthFirstSearch',
@@ -25,4 +27,34 @@ export interface AnimatedSquare {
   animated: boolean;
   isBlocked: boolean;
   delay: number;
+}
+
+export interface IMatrixContext {
+  // Mouse mode.
+  mouseMode: MouseMode;
+  setMouseMode: Dispatch<SetStateAction<MouseMode>>;
+
+  // Start square.
+  startSquareID: string;
+  setStartSquareID: Dispatch<SetStateAction<string>>;
+
+  // End square.
+  endSquareID: string;
+  setEndSquareID: Dispatch<SetStateAction<string>>;
+
+  // Display the animation.
+  isDisplayingAlgorithm: boolean;
+  setIsDisplayingAlgorithm: Dispatch<SetStateAction<boolean>>;
+
+  // Algorithm choice.
+  algorithmChoice: AlgorithmChoice;
+  setAlgorithmChoice: Dispatch<SetStateAction<AlgorithmChoice>>;
+
+  // Matrix
+  matrix: Square[][];
+  setMatrix: Dispatch<SetStateAction<Square[][]>>;
+
+  // Process list.
+  processList: string[];
+  setProcessList: Dispatch<SetStateAction<string[]>>;
 }

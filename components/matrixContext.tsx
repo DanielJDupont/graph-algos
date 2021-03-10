@@ -1,8 +1,13 @@
 import { useState, createContext } from 'react';
 
-import { MouseMode, AlgorithmChoice, Square } from './dataTypes';
+import {
+  MouseMode,
+  AlgorithmChoice,
+  Square,
+  IMatrixContext,
+} from './dataTypes';
 
-const MatrixContext = createContext(null);
+const MatrixContext = createContext<IMatrixContext>(null);
 
 const MatrixProvider = ({ children }) => {
   // Is running the animation.
@@ -33,7 +38,7 @@ const MatrixProvider = ({ children }) => {
   );
 
   // 1D List of the order in which the square IDs were visited from first to last.
-  const [processList, setProcessList] = useState([]);
+  const [processList, setProcessList] = useState<string[]>([]);
 
   return (
     <MatrixContext.Provider
