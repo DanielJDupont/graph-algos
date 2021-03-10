@@ -6,6 +6,11 @@ import { depthFirstSearch } from '../matrix/algorithms';
 import { MatrixContext } from '../matrixContext';
 
 import { Button, MenuItem, Select } from '@material-ui/core';
+import {
+  PlayCircleOutline,
+  FlagOutlined,
+  DirectionsRunOutlined,
+} from '@material-ui/icons';
 
 import styles from './index.module.scss';
 
@@ -28,6 +33,7 @@ export const Navbar = () => {
       </div>
 
       <Select
+        className={styles.selector}
         value={algorithmChoice}
         onChange={(event: any) => setAlgorithmChoice(event.target.value)}
       >
@@ -58,6 +64,7 @@ export const Navbar = () => {
           }
         }}
       >
+        <DirectionsRunOutlined className={styles.icon} />
         Starting Point
       </Button>
 
@@ -75,12 +82,12 @@ export const Navbar = () => {
           }
         }}
       >
+        <FlagOutlined className={styles.icon} />
         Ending Point
       </Button>
 
       <Button
         className={styles.button}
-        style={{ marginLeft: '20px' }}
         variant="contained"
         onClick={() => {
           depthFirstSearch(
@@ -92,6 +99,7 @@ export const Navbar = () => {
           setIsDisplayingAlgorithm(true);
         }}
       >
+        <PlayCircleOutline className={styles.icon} />
         Start Animation
       </Button>
     </div>
