@@ -71,9 +71,7 @@ export const OutputMatrix: React.FC<{}> = () => {
                     delay: square.delay,
                   }}
                 >
-                  <div className={styles.normalSquare} key={square.id}>
-                    {square.isProcessed && 'f'}
-                  </div>
+                  <div className={styles.normalSquare} key={square.id} />
                 </Anime>
               );
             } else if (square.isBlocked) {
