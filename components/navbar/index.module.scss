@@ -4,6 +4,7 @@
   height: 60px;
   background-color: #3276d2;
   margin-bottom: 30px;
+  position: relative;
 
   .navbarTitle {
     color: white;
@@ -40,15 +41,27 @@
     background-color: #3b89da !important;
     margin: 0 5px;
 
+    &.buttonActive {
+      background-color: #67aaf1 !important;
+      color: white;
+      font-weight: 600 !important;
+    }
+
     .icon {
       margin-right: 5px;
       font-size: 20px;
     }
   }
+}
 
-  .buttonActive {
-    background-color: #67aaf1 !important;
-    color: white;
-    font-weight: 600 !important;
-  }
+.controlsContainer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  // Position the top  edge of the element at the middle of the parent.
+  top: 50%;
+  // Position the left edge of the element at the middle of the parent.
+  left: 50%;
+  // Translate X -50% and Translate Y -50%.
+  transform: translate(-50%, -50%);
 }
