@@ -35,28 +35,6 @@ export const Navbar = () => {
         Interactive Graph Algorithm Visualizer
       </div>
 
-      <Select
-        className={styles.selector}
-        value={algorithmChoice}
-        disabled={isDisplayingAlgorithm}
-        onChange={(event: any) => {
-          setAlgorithmChoice(event.target.value);
-          console.log(event.target.value);
-        }}
-      >
-        <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
-          Choose Your Algorithm
-        </MenuItem>
-
-        <MenuItem value={AlgorithmChoice.DepthFirstSearch}>
-          Depth First Search
-        </MenuItem>
-
-        <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>
-          Breadth First Search
-        </MenuItem>
-      </Select>
-
       <Button
         className={clsx(
           styles.button,
@@ -94,6 +72,28 @@ export const Navbar = () => {
         <FlagOutlined className={styles.icon} />
         Ending Point
       </Button>
+
+      <Select
+        className={styles.selector}
+        value={algorithmChoice}
+        disabled={isDisplayingAlgorithm}
+        onChange={(event: any) => {
+          setAlgorithmChoice(event.target.value);
+          console.log(event.target.value);
+        }}
+      >
+        <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
+          Choose Your Algorithm
+        </MenuItem>
+
+        <MenuItem value={AlgorithmChoice.DepthFirstSearch}>
+          Depth First Search
+        </MenuItem>
+
+        <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>
+          Breadth First Search
+        </MenuItem>
+      </Select>
 
       <Button
         className={styles.button}
