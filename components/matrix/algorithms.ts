@@ -2,13 +2,20 @@ import { Dispatch, SetStateAction } from 'react';
 
 import { Square } from '../dataTypes';
 
+const parseStartingSquareID = (startSquareID: string) => {
+  console.log(startSquareID);
+  const i = parseInt(startSquareID.split(' ')[0]);
+  const j = parseInt(startSquareID.split(' ')[1]);
+  return [i, j];
+};
+
 export const depthFirstSearch = (
-  _i: number,
-  _j: number,
+  startSquareID: string,
   matrix: Square[][],
   setProcessList: Dispatch<SetStateAction<string[]>>
 ) => {
   const stack: number[][] = [];
+  const [_i, _j] = parseStartingSquareID(startSquareID);
   stack.push([_i, _j]);
 
   while (stack.length > 0) {
@@ -35,13 +42,12 @@ export const depthFirstSearch = (
 };
 
 export const breadthFirstSearch = (
-  i: number,
-  j: number,
+  startSquareID: string,
   matrix: Square[][],
   setProcessList: Dispatch<SetStateAction<string[]>>
 ) => {
   const queue: number[][] = [];
-
+  const [i, j] = parseStartingSquareID(startSquareID);
   queue.push([i, j]);
 
   while (queue.length > 0) {
