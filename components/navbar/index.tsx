@@ -32,9 +32,7 @@ export const Navbar = () => {
 
   return (
     <div className={styles.navbarContainer}>
-      <div className={styles.navbarTitle}>
-        Interactive Graph Algorithm Visualizer
-      </div>
+      <div className={styles.navbarTitle}>Graph Algos</div>
 
       <div className={styles.controlsContainer}>
         <Button
