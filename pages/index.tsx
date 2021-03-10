@@ -12,7 +12,8 @@ export default function Home() {
       </Head>
 
       <Navbar />
-      <div style={{ position: 'relative' }}>
+      {/* Span the entire height of the screen minus the height of the navbar. */}
+      <div style={{ position: 'relative', height: 'calc(100vh - 60px)' }}>
         <Sidebar />
         <Matrix />
       </div>
