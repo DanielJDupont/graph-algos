@@ -1,32 +1,44 @@
-export const depthFirstSearch = async (
-  i: number,
-  j: number,
-  matrix,
-  setProcessList
+import { Dispatch, SetStateAction } from 'react';
+
+import { Square } from '../dataTypes';
+
+export const depthFirstSearch = (
+  _i: number,
+  _j: number,
+  matrix: Square[][],
+  setProcessList: Dispatch<SetStateAction<string[]>>
 ) => {
-  if (i >= 0 && i < matrix.length) {
-    if (j >= 0 && j < matrix[i].length) {
-      // We have already processed this square.
-      if (matrix[i][j].isProcessed) return;
+  const stack: number[][] = [];
+  stack.push([_i, _j]);
 
-      matrix[i][j].isProcessed = true;
-      setProcessList((oldList) => [...oldList, matrix[i][j].id]);
+  while (stack.length > 0) {
+    const [i, j] = stack.pop();
 
-      // Travel top, right, bottom, left
-      depthFirstSearch(i - 1, j, matrix, setProcessList);
-      depthFirstSearch(i, j + 1, matrix, setProcessList);
-      depthFirstSearch(i + 1, j, matrix, setProcessList);
-      depthFirstSearch(i, j - 1, matrix, setProcessList);
+    // Check to ensure that the current position is on the grid and that it is not blocked or already processed.
+    if (i >= 0 && i < matrix.length) {
+      if (j >= 0 && j < matrix[i].length) {
+        if (!matrix[i][j].isProcessed && !matrix[i][j].isBlocked) {
+          // Process the square.
+          matrix[i][j].isProcessed = true;
+          setProcessList((oldList) => [...oldList, matrix[i][j].id]);
+
+          // Push on left, bottom, right, top.
+          // This way items are popped off in order of top, right, bottom, left.
+          stack.push([i, j - 1]);
+          stack.push([i + 1, j]);
+          stack.push([i, j + 1]);
+          stack.push([i - 1, j]);
+        }
+      }
     }
   }
-  return;
 };
 
-export const breadthFirstSearch = async (
+export const breadthFirstSearch = (
   i: number,
   j: number,
-  matrix,
-  setProcessList
+  matrix: Square[][],
+  setProcessList: Dispatch<SetStateAction<string[]>>
 ) => {
   const queue: number[][] = [];
 

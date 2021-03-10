@@ -135,7 +135,11 @@ export const Navbar = () => {
           setMatrix(
             matrix.map((row) =>
               row.map((square) => {
-                return { ...square, isProcessed: false };
+                if (!square.isBlocked) {
+                  return { ...square, isProcessed: false };
+                } else {
+                  return { ...square, isProcessed: true };
+                }
               })
             )
           );
