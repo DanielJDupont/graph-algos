@@ -10,13 +10,40 @@
     font-size: 18px;
     font-weight: 500;
     margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .selector {
+    color: white;
+    margin: 0 5px;
+
+    svg {
+      color: white;
+    }
+
+    &:hover:not(.Mui-disabled):before {
+      border-color: rgb(220, 220, 220) !important;
+    }
+
+    &:before {
+      border-color: rgb(215, 215, 215);
+    }
+
+    &:after {
+      border-color: rgb(215, 215, 215);
+    }
   }
 
   .button {
     text-transform: none !important;
-
     color: white;
     background-color: #3b89da !important;
+    margin: 0 5px;
+
+    .icon {
+      margin-right: 5px;
+      font-size: 20px;
+    }
   }
 
   .buttonActive {
