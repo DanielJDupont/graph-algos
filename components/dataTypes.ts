@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export enum AlgorithmChoice {
-  ChooseYourAlgorithm = 'ChooseYourAlgorithm',
-  DepthFirstSearch = 'DepthFirstSearch',
-  BreadthFirstSearch = 'BreadthFirstSearch',
+  ChooseYourAlgorithm,
+  DepthFirstSearch,
+  BreadthFirstSearch,
 }
 
 export enum MouseMode {
