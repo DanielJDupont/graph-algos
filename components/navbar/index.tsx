@@ -11,6 +11,7 @@ import {
   FlagOutlined,
   DirectionsRunOutlined,
   ReplayOutlined,
+  GitHub,
 } from '@material-ui/icons';
 
 import styles from './index.module.scss';
@@ -142,6 +143,11 @@ export const Navbar = () => {
           <ReplayOutlined className={styles.icon} />
           Reset
         </Button>
+      </div>
+
+      <div className={styles.github}>
+        <GitHub className={styles.githubIcon} />
+        <div>View On Github</div>
       </div>
     </div>
   );

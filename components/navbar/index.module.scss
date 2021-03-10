@@ -1,6 +1,7 @@
 .navbarContainer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 60px;
   background-color: #3276d2;
   position: relative;
@@ -49,6 +50,19 @@
     .icon {
       margin-right: 5px;
       font-size: 20px;
+    }
+  }
+
+  .github {
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-right: 20px;
+    cursor: pointer;
+
+    .githubIcon {
+      font-size: 20px;
+      margin-right: 5px;
     }
   }
 }
