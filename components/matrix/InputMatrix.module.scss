@@ -1,0 +1,81 @@
+.matrixContainer {
+  display: flex;
+  flex-direction: column;
+
+  .row {
+    display: flex;
+
+    @mixin square {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 35px;
+      width: 35px;
+      background-color: rgb(234, 250, 255);
+      color: #53aefd;
+      border: 1px solid #96ceff;
+      font-size: 10px;
+      user-select: none;
+    }
+
+    .normalSquare {
+      @include square;
+      position: relative;
+    }
+
+    .startSquare {
+      @include square;
+      z-index: 2;
+      background-color: green;
+      border: 1px solid green;
+      animation-name: startSquareAnimation;
+      animation-duration: 0.5s;
+      animation-timing-function: ease-out;
+      animation-delay: 0;
+      animation-direction: alternate;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      animation-play-state: running;
+    }
+
+    .endSquare {
+      @include square;
+      z-index: 1;
+      animation-name: finishSquareAnimation;
+      animation-duration: 0.5s;
+      animation-timing-function: ease-out;
+      animation-delay: 0;
+      animation-direction: alternate;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      animation-play-state: running;
+      background-position: 0px 0px, 5px 5px;
+      background-size: 10px 10px;
+      background-image: linear-gradient(
+          45deg,
+          rgb(145, 145, 145) 25%,
+          transparent 25%,
+          transparent 75%,
+          rgb(145, 145, 145) 75%,
+          rgb(145, 145, 145) 100%
+        ),
+        linear-gradient(
+          45deg,
+          rgb(145, 145, 145) 25%,
+          white 25%,
+          white 75%,
+          rgb(145, 145, 145) 75%,
+          rgb(145, 145, 145) 100%
+        );
+      border: 1px solid rgb(145, 145, 145) !important;
+    }
+
+    .blockedSquare {
+      @include square;
+      color: rgb(61, 61, 61);
+      background-color: rgb(85, 85, 85);
+      border: 1px solid rgb(85, 85, 85);
+    }
+  }
+}
