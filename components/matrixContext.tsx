@@ -14,8 +14,8 @@ const MatrixProvider = ({ children }) => {
   const [isDisplayingAlgorithm, setIsDisplayingAlgorithm] = useState(false);
 
   // The points where the algorithm begins and ends.
-  const [startSquareID, setStartSquareID] = useState('0 0');
-  const [endSquareID, setEndSquareID] = useState('5 5');
+  const [startSquareID, setStartSquareID] = useState('9 9');
+  const [endSquareID, setEndSquareID] = useState('9 20');
 
   // The option the user has picked to either set the start, set the end, or set blockers.
   const [mouseMode, setMouseMode] = useState(MouseMode.NormalPoint);
