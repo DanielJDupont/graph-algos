@@ -4,6 +4,8 @@ import clsx from 'clsx';
 import { MatrixContext } from '../matrixContext';
 import { MouseMode } from '../dataTypes';
 
+import { DirectionsRun } from '@material-ui/icons';
+
 import styles from './InputMatrix.module.scss';
 
 export const InputMatrix: React.FC<{}> = () => {
@@ -84,6 +86,9 @@ export const InputMatrix: React.FC<{}> = () => {
                 key={square.id}
               >
                 {square.isProcessed && <div className={styles.greySquare} />}
+                {square.id === startSquareID && (
+                  <DirectionsRun className={styles.startSquareIcon} />
+                )}
               </div>
             );
           })}

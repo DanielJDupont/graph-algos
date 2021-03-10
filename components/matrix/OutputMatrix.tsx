@@ -4,6 +4,8 @@ import Anime from 'react-animejs-wrapper';
 import { MatrixContext } from '../matrixContext';
 import { AnimatedSquare } from '../dataTypes';
 
+import { DirectionsRun } from '@material-ui/icons';
+
 import styles from './OutputMatrix.module.scss';
 
 export const OutputMatrix: React.FC<{}> = () => {
@@ -79,7 +81,13 @@ export const OutputMatrix: React.FC<{}> = () => {
             } else if (square.id === endSquareID) {
               return <div className={styles.endSquare} />;
             } else if (square.id === startSquareID) {
-              return <div className={styles.startSquare} />;
+              return (
+                <div className={styles.startSquare}>
+                  {square.id === startSquareID && (
+                    <DirectionsRun className={styles.startSquareIcon} />
+                  )}
+                </div>
+              );
             } else {
               return <div className={styles.normalSquare} />;
             }
