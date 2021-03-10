@@ -122,19 +122,20 @@ export const Navbar = () => {
         variant="contained"
         onClick={() => {
           // Wipe out the matrix so nothing is processed anymore.
-          setMatrix((oldMatrix) =>
+          setMatrix(
             matrix.map((row) =>
               row.map((square) => {
                 if (!square.isBlocked) {
                   return { ...square, isProcessed: false };
                 } else {
                   // Squares that are blocked must also be marked as having been processed.
-                  return { ...square, isProcessed: false, isBlocked: false };
+                  return { ...square, isProcessed: true, isBlocked: true };
                 }
               })
             )
           );
           setIsDisplayingAlgorithm(false);
+          setProcessList([]);
         }}
       >
         <ReplayOutlined className={styles.icon} />
