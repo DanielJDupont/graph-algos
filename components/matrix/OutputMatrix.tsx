@@ -7,9 +7,13 @@ import { AnimatedSquare } from '../dataTypes';
 import styles from './OutputMatrix.module.scss';
 
 export const OutputMatrix: React.FC<{}> = () => {
-  const { startSquareID, endSquareID, processList, matrix } = useContext(
-    MatrixContext
-  );
+  const {
+    startSquareID,
+    endSquareID,
+    processList,
+    matrix,
+    setProcessList,
+  } = useContext(MatrixContext);
 
   // Delete all squares that occur after the end square.
   const filteredProcessList = processList.slice(
@@ -22,11 +26,14 @@ export const OutputMatrix: React.FC<{}> = () => {
     row.map((square) => {
       return {
         id: square.id,
-        animated:
-          filteredProcessList.findIndex((id) => id === square.id) * 50 >= 0,
+        animated: square.isBlocked
+          ? false
+          : filteredProcessList.findIndex((id) => id === square.id) * 50 >= 0,
         isBlocked: square.isBlocked,
         isProcessed: square.isProcessed,
-        delay: filteredProcessList.findIndex((id) => id === square.id) * 50,
+        delay: square.isBlocked
+          ? -1
+          : filteredProcessList.findIndex((id) => id === square.id) * 50,
       };
     })
   );
@@ -62,7 +69,9 @@ export const OutputMatrix: React.FC<{}> = () => {
                     delay: square.delay,
                   }}
                 >
-                  <div className={styles.normalSquare} key={square.id} />
+                  <div className={styles.normalSquare} key={square.id}>
+                    {square.isProcessed && 'f'}
+                  </div>
                 </Anime>
               );
             } else if (square.isBlocked) {

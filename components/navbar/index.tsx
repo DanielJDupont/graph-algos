@@ -51,7 +51,7 @@ export const Navbar = () => {
         }}
       >
         <DirectionsRunOutlined className={styles.icon} />
-        Starting Point
+        Starting Point {startSquareID}
       </Button>
 
       <Button
@@ -104,26 +104,16 @@ export const Navbar = () => {
         }
         onClick={() => {
           if (algorithmChoice === AlgorithmChoice.BreadthFirstSearch) {
-            breadthFirstSearch(
-              parseInt(startSquareID.split(' ')[0]),
-              parseInt(startSquareID.split(' ')[1]),
-              matrix,
-              setProcessList
-            );
+            breadthFirstSearch(startSquareID, matrix, setProcessList);
           } else if (algorithmChoice === AlgorithmChoice.DepthFirstSearch) {
-            depthFirstSearch(
-              parseInt(startSquareID.split(' ')[0]),
-              parseInt(startSquareID.split(' ')[1]),
-              matrix,
-              setProcessList
-            );
+            depthFirstSearch(startSquareID, matrix, setProcessList);
           }
 
           setIsDisplayingAlgorithm(true);
         }}
       >
         <PlayCircleOutline className={styles.icon} />
-        Start Animation
+        Start Animation {startSquareID}
       </Button>
 
       <Button
@@ -135,11 +125,17 @@ export const Navbar = () => {
           setMatrix(
             matrix.map((row) =>
               row.map((square) => {
-                return { ...square, isProcessed: false };
+                if (!square.isBlocked) {
+                  return { ...square, isProcessed: false };
+                } else {
+                  // Squares that are blocked must also be marked as having been processed.
+                  return { ...square, isProcessed: true, isBlocked: true };
+                }
               })
             )
           );
           setIsDisplayingAlgorithm(false);
+          setProcessList([]);
         }}
       >
         <ReplayOutlined className={styles.icon} />
