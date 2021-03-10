@@ -19,7 +19,6 @@ export const InputMatrix: React.FC<{}> = () => {
 
   return (
     <div className={styles.matrixContainer}>
-      {/* Input Matrix */}
       {matrix.map((row, rowIndex) => (
         <div className={styles.row} key={rowIndex}>
           {row.map((square) => {

@@ -10,6 +10,7 @@ import { Button, Select, MenuItem } from '@material-ui/core';
 import styles from './index.module.scss';
 import { MatrixContext } from '../matrixContext';
 import { InputMatrix } from './InputMatrix';
+import { OutputMatrix } from './OutputMatrix';
 
 export const Matrix = () => {
   const {
@@ -38,11 +39,6 @@ export const Matrix = () => {
     setMatrix,
   } = useContext(MatrixContext);
 
-  // Track the user selected start and end square by in a single variable.
-  const [algorithmChoice, setAlgorithmChoice] = useState<AlgorithmChoice>(
-    AlgorithmChoice.ChooseYourAlgorithm
-  );
-
   // Delete all squares that occur after the end square.
   const filteredProcessList = processList.slice(
     0,
@@ -65,56 +61,7 @@ export const Matrix = () => {
 
   return (
     <div className={styles.container}>
-      {!isDisplayingAlgorithm ? (
-        <InputMatrix />
-      ) : (
-        <div className={styles.matrixContainer}>
-          {/* Display Matrix with Animation */}
-          {displayMatrix.map((row, key) => (
-            <div className={styles.row} key={key}>
-              {row.map((square) => {
-                if (square.animated && square.id !== startSquareID) {
-                  return (
-                    <Anime
-                      style={{
-                        width: '35px',
-                        height: '35px',
-                      }}
-                      config={{
-                        keyframes: [
-                          {},
-                          {
-                            scale: [0, 1],
-                            backgroundColor: ['#36456d', '#6c88d6'],
-                            borderRadius: ['40%', '0%'],
-                            easing: 'spring(1, 30, 10, 0)',
-                          },
-
-                          {
-                            backgroundColor: ['#6c88d6', '#5161f3'],
-                            easing: 'spring(1, 30, 10, 0)',
-                          },
-                        ],
-                        delay: square.delay,
-                      }}
-                    >
-                      <div className={styles.normalSquare} key={square.id} />
-                    </Anime>
-                  );
-                } else if (square.isBlocked) {
-                  return <div className={styles.blockedSquare} />;
-                } else if (square.id === endSquareID) {
-                  return <div className={styles.endSquare} />;
-                } else if (square.id === startSquareID) {
-                  return <div className={styles.startSquare} />;
-                } else {
-                  return <div className={styles.normalSquare} />;
-                }
-              })}
-            </div>
-          ))}
-        </div>
-      )}
+      {!isDisplayingAlgorithm ? <InputMatrix /> : <OutputMatrix />}
     </div>
   );
 };
