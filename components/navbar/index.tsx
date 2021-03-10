@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import clsx from 'clsx';
 
 import { AlgorithmChoice, MouseMode } from '../dataTypes';
-import { depthFirstSearch } from '../matrix/algorithms';
+import { depthFirstSearch, breadthFirstSearch } from '../matrix/algorithms';
 import { MatrixContext } from '../matrixContext';
 
 import { Button, MenuItem, Select } from '@material-ui/core';
@@ -10,6 +10,7 @@ import {
   PlayCircleOutline,
   FlagOutlined,
   DirectionsRunOutlined,
+  ReplayOutlined,
 } from '@material-ui/icons';
 
 import styles from './index.module.scss';
@@ -35,7 +36,10 @@ export const Navbar = () => {
       <Select
         className={styles.selector}
         value={algorithmChoice}
-        onChange={(event: any) => setAlgorithmChoice(event.target.value)}
+        onChange={(event: any) => {
+          setAlgorithmChoice(event.target.value);
+          console.log(event.target.value);
+        }}
       >
         <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
           Choose Your Algorithm
@@ -90,17 +94,36 @@ export const Navbar = () => {
         className={styles.button}
         variant="contained"
         onClick={() => {
-          depthFirstSearch(
-            parseInt(startSquareID.split(' ')[0]),
-            parseInt(startSquareID.split(' ')[1]),
-            matrix,
-            setProcessList
-          );
+          if (algorithmChoice === AlgorithmChoice.BreadthFirstSearch) {
+            breadthFirstSearch(
+              parseInt(startSquareID.split(' ')[0]),
+              parseInt(startSquareID.split(' ')[1]),
+              matrix,
+              setProcessList
+            );
+          } else if (algorithmChoice === AlgorithmChoice.DepthFirstSearch) {
+            depthFirstSearch(
+              parseInt(startSquareID.split(' ')[0]),
+              parseInt(startSquareID.split(' ')[1]),
+              matrix,
+              setProcessList
+            );
+          }
+
           setIsDisplayingAlgorithm(true);
         }}
       >
         <PlayCircleOutline className={styles.icon} />
         Start Animation
+      </Button>
+
+      <Button
+        className={clsx(styles.button)}
+        variant="contained"
+        onClick={() => {}}
+      >
+        <ReplayOutlined className={styles.icon} />
+        Reset
       </Button>
     </div>
   );

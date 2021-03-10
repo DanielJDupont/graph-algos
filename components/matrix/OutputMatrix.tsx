@@ -7,13 +7,9 @@ import { AnimatedSquare } from '../dataTypes';
 import styles from './OutputMatrix.module.scss';
 
 export const OutputMatrix: React.FC<{}> = () => {
-  const {
-    startSquareID,
-    endSquareID,
-    isDisplayingAlgorithm,
-    processList,
-    matrix,
-  } = useContext(MatrixContext);
+  const { startSquareID, endSquareID, processList, matrix } = useContext(
+    MatrixContext
+  );
 
   // Delete all squares that occur after the end square.
   const filteredProcessList = processList.slice(
