@@ -1,44 +1,46 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import clsx from 'clsx';
 import Anime from 'react-animejs-wrapper';
 
 import { depthFirstSearch } from './algorithms';
-import {
-  AlgorithmChoice,
-  AnimatedSquare,
-  MouseMode,
-  Square,
-} from '../dataTypes';
+import { AlgorithmChoice, AnimatedSquare, MouseMode } from '../dataTypes';
 
 import { Button, Select, MenuItem } from '@material-ui/core';
 
 import styles from './index.module.scss';
+import { MatrixContext } from '../matrixContext';
 
 export const Matrix = () => {
-  // Track the user selected start and end square by in a single variable.
-  const [isDisplayingAlgorithm, setIsDisplayingAlgorithm] = useState(false);
-  const [startSquareID, setStartSquareID] = useState('0 0');
-  const [endSquareID, setEndSquareID] = useState('5 5');
+  const {
+    // Start square.
+    startSquareID,
+    setStartSquareID,
 
-  const [mouseMode, setMouseMode] = useState<MouseMode>(MouseMode.NormalPoint);
+    // End square.
+    endSquareID,
+    setEndSquareID,
+
+    // Show the animation.
+    isDisplayingAlgorithm,
+    setIsDisplayingAlgorithm,
+
+    // Mode of the mouse.
+    mouseMode,
+    setMouseMode,
+
+    // Process list.
+    processList,
+    setProcessList,
+
+    // Matrix.
+    matrix,
+    setMatrix,
+  } = useContext(MatrixContext);
+
+  // Track the user selected start and end square by in a single variable.
   const [algorithmChoice, setAlgorithmChoice] = useState<AlgorithmChoice>(
     AlgorithmChoice.ChooseYourAlgorithm
   );
-
-  // This matrix is used for performing computations.
-  const [matrix, setMatrix] = useState<Square[][]>(
-    [...Array(20)].map((_, i) =>
-      [...Array(30)].map((_, j) => ({
-        id: i + ' ' + j,
-        isProcessed: false,
-        animated: false,
-        isBlocked: false,
-      }))
-    )
-  );
-
-  // 1D List of the order in which the square IDs were visited from first to last.
-  const [processList, setProcessList] = useState([]);
 
   // Delete all squares that occur after the end square.
   const filteredProcessList = processList.slice(
@@ -62,77 +64,6 @@ export const Matrix = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.buttonWrapper}>
-        <div className={styles.buttonRow}>
-          <Select
-            value={algorithmChoice}
-            onChange={(event: any) => setAlgorithmChoice(event.target.value)}
-          >
-            <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
-              Choose Your Algorithm
-            </MenuItem>
-
-            <MenuItem value={AlgorithmChoice.DepthFirstSearch}>
-              Depth First Search
-            </MenuItem>
-
-            <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>
-              Breadth First Search
-            </MenuItem>
-          </Select>
-
-          <Button
-            className={clsx(
-              styles.button,
-              mouseMode === MouseMode.StartingPoint && styles.buttonActive
-            )}
-            variant="contained"
-            onClick={() => {
-              if (mouseMode !== MouseMode.StartingPoint) {
-                setMouseMode(MouseMode.StartingPoint);
-              } else if (mouseMode === MouseMode.StartingPoint) {
-                setMouseMode(MouseMode.NormalPoint);
-              }
-            }}
-          >
-            Starting Point
-          </Button>
-
-          <Button
-            className={clsx(
-              styles.button,
-              mouseMode === MouseMode.EndingPoint && styles.buttonActive
-            )}
-            variant="contained"
-            onClick={() => {
-              if (mouseMode !== MouseMode.EndingPoint) {
-                setMouseMode(MouseMode.EndingPoint);
-              } else if (mouseMode === MouseMode.EndingPoint) {
-                setMouseMode(MouseMode.NormalPoint);
-              }
-            }}
-          >
-            Ending Point
-          </Button>
-
-          <Button
-            className={styles.button}
-            style={{ marginLeft: '20px' }}
-            variant="contained"
-            onClick={() => {
-              depthFirstSearch(
-                parseInt(startSquareID.split(' ')[0]),
-                parseInt(startSquareID.split(' ')[1]),
-                matrix,
-                setProcessList
-              );
-              setIsDisplayingAlgorithm(true);
-            }}
-          >
-            Start Animation
-          </Button>
-        </div>
-      </div>
       {!isDisplayingAlgorithm ? (
         <div className={styles.matrixContainer}>
           {/* Input Matrix */}

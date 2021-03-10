@@ -1,6 +1,6 @@
 import { useState, createContext } from 'react';
 
-import { MouseMode, AlgorithmChoice } from './dataTypes';
+import { MouseMode, AlgorithmChoice, Square } from './dataTypes';
 
 const MatrixContext = createContext(null);
 
@@ -20,8 +20,53 @@ const MatrixProvider = ({ children }) => {
     AlgorithmChoice.ChooseYourAlgorithm
   );
 
+  // This matrix is used for performing computations.
+  const [matrix, setMatrix] = useState<Square[][]>(
+    [...Array(20)].map((_, i) =>
+      [...Array(30)].map((_, j) => ({
+        id: i + ' ' + j,
+        isProcessed: false,
+        animated: false,
+        isBlocked: false,
+      }))
+    )
+  );
+
+  // 1D List of the order in which the square IDs were visited from first to last.
+  const [processList, setProcessList] = useState([]);
+
   return (
-    <MatrixContext.Provider value={{ mouseMode, setMouseMode }}>
+    <MatrixContext.Provider
+      value={{
+        // Mouse mode.
+        mouseMode,
+        setMouseMode,
+
+        // Start square.
+        startSquareID,
+        setStartSquareID,
+
+        // End square.
+        endSquareID,
+        setEndSquareID,
+
+        // Display the animation.
+        isDisplayingAlgorithm,
+        setIsDisplayingAlgorithm,
+
+        // Algorithm choice.
+        algorithmChoice,
+        setAlgorithmChoice,
+
+        // Matrix
+        matrix,
+        setMatrix,
+
+        // Process list.
+        processList,
+        setProcessList,
+      }}
+    >
       {children}
     </MatrixContext.Provider>
   );
