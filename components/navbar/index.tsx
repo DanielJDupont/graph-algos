@@ -51,7 +51,7 @@ export const Navbar = () => {
         }}
       >
         <DirectionsRunOutlined className={styles.icon} />
-        Starting Point {startSquareID}
+        Starting Point
       </Button>
 
       <Button
@@ -113,7 +113,7 @@ export const Navbar = () => {
         }}
       >
         <PlayCircleOutline className={styles.icon} />
-        Start Animation {startSquareID}
+        Start Animation
       </Button>
 
       <Button
