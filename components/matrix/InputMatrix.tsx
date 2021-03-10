@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import clsx from 'clsx';
 
 import { MatrixContext } from '../matrixContext';
+import { MouseMode } from '../dataTypes';
 
 import styles from './InputMatrix.module.scss';
-import { MouseMode } from '../dataTypes';
 
 export const InputMatrix: React.FC<{}> = () => {
   const {

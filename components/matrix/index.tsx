@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 
-import { AnimatedSquare } from '../dataTypes';
 import { MatrixContext } from '../matrixContext';
 import { InputMatrix } from './InputMatrix';
 import { OutputMatrix } from './OutputMatrix';
