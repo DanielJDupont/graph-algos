@@ -44,31 +44,33 @@ export const OutputMatrix: React.FC<{}> = () => {
           {row.map((square) => {
             if (square.animated && square.id !== startSquareID) {
               return (
-                <Anime
-                  style={{
-                    width: '35px',
-                    height: '35px',
-                  }}
-                  config={{
-                    keyframes: [
-                      {},
-                      {
-                        scale: [0, 1],
-                        backgroundColor: ['#36456d', '#6c88d6'],
-                        borderRadius: ['40%', '0%'],
-                        easing: 'spring(1, 30, 10, 0)',
-                      },
+                <div className={styles.normalSquare}>
+                  <Anime
+                    style={{
+                      width: '35px',
+                      height: '35px',
+                    }}
+                    config={{
+                      keyframes: [
+                        {},
+                        {
+                          scale: [0, 1],
+                          backgroundColor: ['#36456d', '#6c88d6'],
+                          borderRadius: ['40%', '0%'],
+                          easing: 'spring(1, 30, 10, 0)',
+                        },
 
-                      {
-                        backgroundColor: ['#6c88d6', '#5161f3'],
-                        easing: 'spring(1, 30, 10, 0)',
-                      },
-                    ],
-                    delay: square.delay,
-                  }}
-                >
-                  <div className={styles.normalSquare} key={square.id} />
-                </Anime>
+                        {
+                          backgroundColor: ['#6c88d6', '#5161f3'],
+                          easing: 'spring(1, 30, 10, 0)',
+                        },
+                      ],
+                      delay: square.delay,
+                    }}
+                  >
+                    <div className={styles.normalSquare} key={square.id} />
+                  </Anime>
+                </div>
               );
             } else if (square.isBlocked) {
               return <div className={styles.blockedSquare} />;
