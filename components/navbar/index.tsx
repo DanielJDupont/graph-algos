@@ -5,7 +5,7 @@ import { AlgorithmChoice, MouseMode } from '../dataTypes';
 import { depthFirstSearch, breadthFirstSearch } from '../matrix/algorithms';
 import { MatrixContext } from '../matrixContext';
 
-import { Button, MenuItem, Select } from '@material-ui/core';
+import { Button, MenuItem, Select, Tooltip } from '@material-ui/core';
 import {
   PlayCircleOutline,
   FlagOutlined,
@@ -13,6 +13,7 @@ import {
   ReplayOutlined,
   GitHub,
 } from '@material-ui/icons';
+import { withStyles } from '@material-ui/core/styles';
 
 import styles from './index.module.scss';
 
@@ -35,43 +36,53 @@ export const Navbar = () => {
       <div className={styles.navbarTitle}>Graph Algos</div>
 
       <div className={styles.controlsContainer}>
-        <Button
-          className={clsx(
-            styles.button,
-            mouseMode === MouseMode.StartingPoint && styles.buttonActive
-          )}
-          disabled={isDisplayingAlgorithm}
-          variant="contained"
-          onClick={() => {
-            if (mouseMode !== MouseMode.StartingPoint) {
-              setMouseMode(MouseMode.StartingPoint);
-            } else if (mouseMode === MouseMode.StartingPoint) {
-              setMouseMode(MouseMode.NormalPoint);
-            }
-          }}
+        <Tooltip
+          title="Set the starting point of the algorithm!"
+          enterDelay={300}
         >
-          <DirectionsRunOutlined className={styles.icon} />
-          Starting Point
-        </Button>
+          <Button
+            className={clsx(
+              styles.button,
+              mouseMode === MouseMode.StartingPoint && styles.buttonActive
+            )}
+            disabled={isDisplayingAlgorithm}
+            variant="contained"
+            onClick={() => {
+              if (mouseMode !== MouseMode.StartingPoint) {
+                setMouseMode(MouseMode.StartingPoint);
+              } else if (mouseMode === MouseMode.StartingPoint) {
+                setMouseMode(MouseMode.NormalPoint);
+              }
+            }}
+          >
+            <DirectionsRunOutlined className={styles.icon} />
+            Starting Point
+          </Button>
+        </Tooltip>
 
-        <Button
-          className={clsx(
-            styles.button,
-            mouseMode === MouseMode.EndingPoint && styles.buttonActive
-          )}
-          disabled={isDisplayingAlgorithm}
-          variant="contained"
-          onClick={() => {
-            if (mouseMode !== MouseMode.EndingPoint) {
-              setMouseMode(MouseMode.EndingPoint);
-            } else if (mouseMode === MouseMode.EndingPoint) {
-              setMouseMode(MouseMode.NormalPoint);
-            }
-          }}
+        <Tooltip
+          title="Click to set a square where the algorithm will end!"
+          enterDelay={300}
         >
-          <FlagOutlined className={styles.icon} />
-          Ending Point
-        </Button>
+          <Button
+            className={clsx(
+              styles.button,
+              mouseMode === MouseMode.EndingPoint && styles.buttonActive
+            )}
+            disabled={isDisplayingAlgorithm}
+            variant="contained"
+            onClick={() => {
+              if (mouseMode !== MouseMode.EndingPoint) {
+                setMouseMode(MouseMode.EndingPoint);
+              } else if (mouseMode === MouseMode.EndingPoint) {
+                setMouseMode(MouseMode.NormalPoint);
+              }
+            }}
+          >
+            <FlagOutlined className={styles.icon} />
+            Ending Point
+          </Button>
+        </Tooltip>
 
         <Select
           className={styles.selector}
