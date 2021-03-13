@@ -38,7 +38,7 @@ export const InputMatrix: React.FC<{}> = () => {
                     setEndSquareID(square.id);
                   }
 
-                  // Click to remove individual dark grey squares.
+                  // Click to remove individual blocked squares.
                   else {
                     setMatrix(
                       matrix.map((row) =>
