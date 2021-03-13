@@ -143,10 +143,12 @@ export const Navbar = () => {
         </Button>
       </div>
 
-      <div className={styles.github}>
-        <GitHub className={styles.githubIcon} />
-        <div>View On Github</div>
-      </div>
+      <a href="https://github.com/DanielJDupont/graph-algos" target="_blank">
+        <div className={styles.github}>
+          <GitHub className={styles.githubIcon} />
+          <div>View On Github</div>
+        </div>
+      </a>
     </div>
   );
 };
