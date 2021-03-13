@@ -13,7 +13,6 @@ import {
   ReplayOutlined,
   GitHub,
 } from '@material-ui/icons';
-import { withStyles } from '@material-ui/core/styles';
 
 import styles from './index.module.scss';
 
