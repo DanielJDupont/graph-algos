@@ -26,11 +26,7 @@ export const InputMatrix: React.FC<{}> = () => {
           {row.map((square) => {
             return (
               <div
-                className={clsx(
-                  styles.normalSquare,
-                  square.id === startSquareID && styles.startSquare,
-                  square.id === endSquareID && styles.endSquare
-                )}
+                className={clsx(styles.normalSquare)}
                 onMouseDown={() => {
                   // Click to set the start square only if start square button is set.
                   if (mouseMode === MouseMode.StartingPoint) {
@@ -87,7 +83,15 @@ export const InputMatrix: React.FC<{}> = () => {
               >
                 {square.isProcessed && <div className={styles.greySquare} />}
                 {square.id === startSquareID && (
-                  <DirectionsRun className={styles.startSquareIcon} />
+                  <div className={styles.startSquare}>
+                    <DirectionsRun className={styles.startSquareIcon} />
+                  </div>
+                )}
+
+                {square.id === endSquareID && (
+                  <div className={styles.normalSquare}>
+                    <div className={styles.endSquare} />
+                  </div>
                 )}
               </div>
             );

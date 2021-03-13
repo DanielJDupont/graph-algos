@@ -47,6 +47,8 @@
     .endSquare {
       @include square;
       z-index: 1;
+      height: 35px;
+      width: 35px;
       animation-name: finishSquareAnimation;
       animation-duration: 0.5s;
       animation-timing-function: ease-out;
