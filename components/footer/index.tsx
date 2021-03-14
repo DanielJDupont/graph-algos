@@ -6,7 +6,7 @@ export const Footer = () => {
       <div className={styles.createdBy}>
         Created by Daniel Dupont | Graph Algos © 2020
       </div>
-      <div>
+      <div className={styles.shields}>
         <img
           alt="GitHub"
           src="https://img.shields.io/github/license/danieljdupont/graph-algos?logo=MIT&color=9cf"
