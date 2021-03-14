@@ -45,6 +45,7 @@ const MatrixProvider = ({ children }) => {
     // If there is already an end square here.
     if (
       id === endSquareID ||
+      id === startSquareID ||
       matrix[parseInt(id.split(' ')[0])][parseInt(id.split(' ')[1])].isBlocked
     )
       return;
