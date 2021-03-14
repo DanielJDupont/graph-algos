@@ -65,7 +65,11 @@ export const InputMatrix: React.FC<{}> = () => {
                       setMatrix(
                         matrix.map((row) =>
                           row.map((_square) => {
-                            if (_square.id === square.id) {
+                            if (
+                              _square.id === square.id &&
+                              _square.id !== startSquareID &&
+                              _square.id !== endSquareID
+                            ) {
                               return {
                                 id: _square.id,
                                 isProcessed: !square.isProcessed,
