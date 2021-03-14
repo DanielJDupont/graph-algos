@@ -38,11 +38,22 @@
   transform: translateX(0%);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-  .icon {
-    font-size: 30px;
-    color: rgb(150, 150, 150);
-    margin-top: 5px;
-    margin-right: 5px;
+  .topContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      font-weight: 500;
+      color: rgb(58, 58, 58);
+      margin: 0;
+      margin-left: 95px;
+    }
+
+    .icon {
+      font-size: 30px;
+      color: rgb(150, 150, 150);
+    }
   }
 }
 
@@ -76,4 +87,8 @@
     transition: color 200ms ease-in-out;
     margin-bottom: 20px;
   }
+}
+
+.tutorialText {
+  margin-bottom: 0 !important;
 }
