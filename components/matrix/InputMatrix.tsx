@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import clsx from 'clsx';
 
 import { MatrixContext } from '../matrixContext';
-import { MouseMode } from '../dataTypes';
+import { MouseMode, SET_SQUARE } from '../dataTypes';
 
 import { DirectionsRun } from '@material-ui/icons';
 
@@ -12,9 +12,8 @@ export const InputMatrix: React.FC<{}> = () => {
   const {
     matrix,
     startSquareID,
-    setStartSquareID,
     endSquareID,
-    setEndSquareID,
+    setSquareID,
     mouseMode,
     setMatrix,
   } = useContext(MatrixContext);
@@ -30,12 +29,12 @@ export const InputMatrix: React.FC<{}> = () => {
                 onMouseDown={() => {
                   // Click to set the start square only if start square button is set.
                   if (mouseMode === MouseMode.StartingPoint) {
-                    setStartSquareID(square.id);
+                    setSquareID(square.id, SET_SQUARE.START);
                   }
 
                   // Click to set the end square only if the ending point button is clicked.
                   else if (mouseMode === MouseMode.EndingPoint) {
-                    setEndSquareID(square.id);
+                    setSquareID(square.id, SET_SQUARE.END);
                   }
 
                   // Click to remove individual blocked squares.
@@ -59,9 +58,9 @@ export const InputMatrix: React.FC<{}> = () => {
                   // If the user is entering the square while holding down the left mouse button.
                   if (mouseEvent.buttons === 1) {
                     if (mouseMode === MouseMode.EndingPoint) {
-                      setEndSquareID(square.id);
+                      setSquareID(square.id, SET_SQUARE.END);
                     } else if (mouseMode === MouseMode.StartingPoint) {
-                      setStartSquareID(square.id);
+                      setSquareID(square.id, SET_SQUARE.START);
                     } else {
                       setMatrix(
                         matrix.map((row) =>

@@ -5,6 +5,7 @@ import {
   AlgorithmChoice,
   Square,
   IMatrixContext,
+  SET_SQUARE,
 } from './dataTypes';
 
 const MatrixContext = createContext<IMatrixContext>(null);
@@ -14,8 +15,8 @@ const MatrixProvider = ({ children }) => {
   const [isDisplayingAlgorithm, setIsDisplayingAlgorithm] = useState(false);
 
   // The points where the algorithm begins and ends.
-  const [startSquareID, setStartSquareID] = useState('9 9');
-  const [endSquareID, setEndSquareID] = useState('9 20');
+  const [startSquareID, _setStartSquareID] = useState('9 9');
+  const [endSquareID, _setEndSquareID] = useState('9 20');
 
   // The option the user has picked to either set the start, set the end, or set blockers.
   const [mouseMode, setMouseMode] = useState(MouseMode.NormalPoint);
@@ -40,6 +41,18 @@ const MatrixProvider = ({ children }) => {
   // 1D List of the order in which the square IDs were visited from first to last.
   const [processList, setProcessList] = useState<string[]>([]);
 
+  const setSquareID = (id: string, action: SET_SQUARE) => {
+    // If there is already an end square here.
+    if (
+      id === endSquareID ||
+      matrix[parseInt(id.split(' ')[0])][parseInt(id.split(' ')[1])].isBlocked
+    )
+      return;
+
+    if (action === SET_SQUARE.START) _setStartSquareID(id);
+    if (action === SET_SQUARE.END) _setEndSquareID(id);
+  };
+
   return (
     <MatrixContext.Provider
       value={{
@@ -47,13 +60,10 @@ const MatrixProvider = ({ children }) => {
         mouseMode,
         setMouseMode,
 
-        // Start square.
+        // Start and End squares.
         startSquareID,
-        setStartSquareID,
-
-        // End square.
         endSquareID,
-        setEndSquareID,
+        setSquareID,
 
         // Display the animation.
         isDisplayingAlgorithm,
