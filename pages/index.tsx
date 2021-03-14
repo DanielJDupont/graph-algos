@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { Matrix } from '../components/matrix';
 import { Navbar } from '../components/navbar';
-import { Sidebar } from '../components/sidebar/Sidebar';
+import { Sidebar } from '../components/sidebar';
+import { Footer } from '../components/footer';
 
 export default function Home() {
   return (
@@ -13,10 +14,15 @@ export default function Home() {
 
       <Navbar />
       {/* Span the entire height of the screen minus the height of the navbar. */}
-      <div style={{ position: 'relative', height: 'calc(100vh - 60px)' }}>
+      <div
+        // Subtract the height of the navbar and the height of the footer.
+        style={{ position: 'relative', height: 'calc(100vh - 60px - 60px)' }}
+      >
         <Sidebar />
         <Matrix />
       </div>
+
+      <Footer />
     </>
   );
 }

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import { KeyboardArrowRight, KeyboardArrowLeft } from '@material-ui/icons';
 
-import styles from './Sidebar.module.scss';
+import styles from './index.module.scss';
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
