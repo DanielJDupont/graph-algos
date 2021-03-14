@@ -58,7 +58,12 @@ export const Sidebar = () => {
             />
           </div>
 
-          <div>Reset and change what you like.</div>
+          <div>
+            <div className={styles.tutorialText}>
+              Reset and change what you like.
+            </div>
+            <img src="reset.gif" />
+          </div>
         </div>
       </div>
     </div>
