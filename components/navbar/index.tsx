@@ -105,52 +105,56 @@ export const Navbar = () => {
           </MenuItem>
         </Select>
 
-        <Button
-          className={styles.button}
-          variant="contained"
-          disabled={
-            algorithmChoice === AlgorithmChoice.ChooseYourAlgorithm ||
-            isDisplayingAlgorithm
-          }
-          onClick={() => {
-            if (algorithmChoice === AlgorithmChoice.BreadthFirstSearch) {
-              breadthFirstSearch(startSquareID, matrix, setProcessList);
-            } else if (algorithmChoice === AlgorithmChoice.DepthFirstSearch) {
-              depthFirstSearch(startSquareID, matrix, setProcessList);
+        {!isDisplayingAlgorithm && (
+          <Button
+            className={styles.button}
+            variant="contained"
+            disabled={
+              algorithmChoice === AlgorithmChoice.ChooseYourAlgorithm ||
+              isDisplayingAlgorithm
             }
+            onClick={() => {
+              if (algorithmChoice === AlgorithmChoice.BreadthFirstSearch) {
+                breadthFirstSearch(startSquareID, matrix, setProcessList);
+              } else if (algorithmChoice === AlgorithmChoice.DepthFirstSearch) {
+                depthFirstSearch(startSquareID, matrix, setProcessList);
+              }
 
-            setIsDisplayingAlgorithm(true);
-          }}
-        >
-          <PlayCircleOutline className={styles.icon} />
-          Start Animation
-        </Button>
+              setIsDisplayingAlgorithm(true);
+            }}
+          >
+            <PlayCircleOutline className={styles.icon} />
+            Start Animation
+          </Button>
+        )}
 
-        <Button
-          className={clsx(styles.button)}
-          disabled={!isDisplayingAlgorithm}
-          variant="contained"
-          onClick={() => {
-            // Wipe out the matrix so nothing is processed anymore.
-            setMatrix(
-              matrix.map((row) =>
-                row.map((square) => {
-                  if (!square.isBlocked) {
-                    return { ...square, isProcessed: false };
-                  } else {
-                    // Squares that are blocked must also be marked as having been processed.
-                    return { ...square, isProcessed: true, isBlocked: true };
-                  }
-                })
-              )
-            );
-            setIsDisplayingAlgorithm(false);
-            setProcessList([]);
-          }}
-        >
-          <ReplayOutlined className={styles.icon} />
-          Reset
-        </Button>
+        {isDisplayingAlgorithm && (
+          <Button
+            className={clsx(styles.button)}
+            disabled={!isDisplayingAlgorithm}
+            variant="contained"
+            onClick={() => {
+              // Wipe out the matrix so nothing is processed anymore.
+              setMatrix(
+                matrix.map((row) =>
+                  row.map((square) => {
+                    if (!square.isBlocked) {
+                      return { ...square, isProcessed: false };
+                    } else {
+                      // Squares that are blocked must also be marked as having been processed.
+                      return { ...square, isProcessed: true, isBlocked: true };
+                    }
+                  })
+                )
+              );
+              setIsDisplayingAlgorithm(false);
+              setProcessList([]);
+            }}
+          >
+            <ReplayOutlined className={styles.icon} />
+            Reset
+          </Button>
+        )}
       </div>
 
       <a href="https://github.com/DanielJDupont/graph-algos" target="_blank">
