@@ -1,11 +1,13 @@
 .navbarContainer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 60px;
   background-color: #3276d2;
-  margin-bottom: 30px;
+  position: relative;
 
   .navbarTitle {
+    cursor: default;
     color: white;
     font-size: 18px;
     font-weight: 500;
@@ -39,6 +41,13 @@
     color: white;
     background-color: #3b89da !important;
     margin: 0 5px;
+    width: 170px;
+
+    &.buttonActive {
+      background-color: #67aaf1 !important;
+      color: white;
+      font-weight: 600 !important;
+    }
 
     .icon {
       margin-right: 5px;
@@ -46,9 +55,28 @@
     }
   }
 
-  .buttonActive {
-    background-color: #67aaf1 !important;
+  .github {
+    display: flex;
+    align-items: center;
     color: white;
-    font-weight: 600 !important;
+    margin-right: 20px;
+    cursor: pointer;
+
+    .githubIcon {
+      font-size: 20px;
+      margin-right: 5px;
+    }
   }
+}
+
+.controlsContainer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  // Position the top  edge of the element at the middle of the parent.
+  top: 50%;
+  // Position the left edge of the element at the middle of the parent.
+  left: 50%;
+  // Translate X -50% and Translate Y -50%.
+  transform: translate(-50%, -50%);
 }

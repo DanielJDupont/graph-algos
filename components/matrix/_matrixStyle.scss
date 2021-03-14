@@ -1,6 +1,7 @@
 .matrixContainer {
   display: flex;
   flex-direction: column;
+  border: 1px solid #96ceff;
 
   .row {
     display: flex;
@@ -37,11 +38,18 @@
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
       animation-play-state: running;
+
+      .startSquareIcon {
+        color: lightgreen;
+        font-size: 28px;
+      }
     }
 
     .endSquare {
       @include square;
       z-index: 1;
+      height: 35px;
+      width: 35px;
       animation-name: finishSquareAnimation;
       animation-duration: 0.5s;
       animation-timing-function: ease-out;

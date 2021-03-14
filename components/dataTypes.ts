@@ -34,13 +34,10 @@ export interface IMatrixContext {
   mouseMode: MouseMode;
   setMouseMode: Dispatch<SetStateAction<MouseMode>>;
 
-  // Start square.
+  // Start and End squares.
   startSquareID: string;
-  setStartSquareID: Dispatch<SetStateAction<string>>;
-
-  // End square.
   endSquareID: string;
-  setEndSquareID: Dispatch<SetStateAction<string>>;
+  setSquareID: (id: string, action: SET_SQUARE) => void
 
   // Display the animation.
   isDisplayingAlgorithm: boolean;
@@ -57,4 +54,11 @@ export interface IMatrixContext {
   // Process list.
   processList: string[];
   setProcessList: Dispatch<SetStateAction<string[]>>;
+}
+
+
+// Actions for setting the id of the start and end squares.
+export enum SET_SQUARE {
+  START,
+  END,
 }
