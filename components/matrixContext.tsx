@@ -63,6 +63,7 @@ const MatrixProvider = ({ children }) => {
   };
 
   const setMazeGenerator = (value: MAZE_GENERATOR) => {
+    // Clear
     if (value === MAZE_GENERATOR.CLEAR) {
       setMatrix(
         [...Array(20)].map((_, i) =>
@@ -76,6 +77,7 @@ const MatrixProvider = ({ children }) => {
       );
     }
 
+    // Scatter
     if (value === MAZE_GENERATOR.SCATTER) {
       setMatrix(
         [...Array(20)].map((_, i) =>
@@ -98,6 +100,8 @@ const MatrixProvider = ({ children }) => {
         )
       );
     }
+
+    // Recursive Maze
 
     _setMazeGenerator(value);
   };
