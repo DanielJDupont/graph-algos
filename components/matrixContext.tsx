@@ -6,6 +6,7 @@ import {
   Square,
   IMatrixContext,
   SET_SQUARE,
+  PLAYBACK_SPEED,
 } from './dataTypes';
 
 const MatrixContext = createContext<IMatrixContext>(null);
@@ -20,6 +21,8 @@ const MatrixProvider = ({ children }) => {
 
   // The option the user has picked to either set the start, set the end, or set blockers.
   const [mouseMode, setMouseMode] = useState(MouseMode.NormalPoint);
+
+  const [playbackSpeed, setPlaybackSpeed] = useState(PLAYBACK_SPEED['_1.00']);
 
   // The choice of algorithm in the algorithms.ts file in the matrix directory.
   const [algorithmChoice, setAlgorithmChoice] = useState(
@@ -81,6 +84,10 @@ const MatrixProvider = ({ children }) => {
         // Process list.
         processList,
         setProcessList,
+
+        // Playback Speed
+        playbackSpeed,
+        setPlaybackSpeed,
       }}
     >
       {children}

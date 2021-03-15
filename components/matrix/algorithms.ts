@@ -3,7 +3,6 @@ import { Dispatch, SetStateAction } from 'react';
 import { Square } from '../dataTypes';
 
 const parseStartingSquareID = (startSquareID: string) => {
-  console.log(startSquareID);
   const i = parseInt(startSquareID.split(' ')[0]);
   const j = parseInt(startSquareID.split(' ')[1]);
   return [i, j];

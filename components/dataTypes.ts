@@ -37,7 +37,7 @@ export interface IMatrixContext {
   // Start and End squares.
   startSquareID: string;
   endSquareID: string;
-  setSquareID: (id: string, action: SET_SQUARE) => void
+  setSquareID: (id: string, action: SET_SQUARE) => void;
 
   // Display the animation.
   isDisplayingAlgorithm: boolean;
@@ -47,18 +47,32 @@ export interface IMatrixContext {
   algorithmChoice: AlgorithmChoice;
   setAlgorithmChoice: Dispatch<SetStateAction<AlgorithmChoice>>;
 
-  // Matrix
+  // Matrix.
   matrix: Square[][];
   setMatrix: Dispatch<SetStateAction<Square[][]>>;
 
   // Process list.
   processList: string[];
   setProcessList: Dispatch<SetStateAction<string[]>>;
-}
 
+  // Playback speed.
+  playbackSpeed: PLAYBACK_SPEED;
+  setPlaybackSpeed: Dispatch<SetStateAction<PLAYBACK_SPEED>>;
+}
 
 // Actions for setting the id of the start and end squares.
 export enum SET_SQUARE {
   START,
   END,
+}
+
+export enum PLAYBACK_SPEED {
+  '_0.25' = 0.25,
+  '_0.50' = 0.5,
+  '_0.75' = 0.75,
+  '_1.00' = 1.0,
+  '_1.25' = 1.25,
+  '_1.50' = 1.5,
+  '_1.75' = 1.75,
+  '_2.00' = 2.0,
 }

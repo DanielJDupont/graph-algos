@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import clsx from 'clsx';
 
-import { AlgorithmChoice, MouseMode } from '../dataTypes';
+import { AlgorithmChoice, MouseMode, PLAYBACK_SPEED } from '../dataTypes';
 import { depthFirstSearch, breadthFirstSearch } from '../matrix/algorithms';
 import { MatrixContext } from '../matrixContext';
 
@@ -28,6 +28,8 @@ export const Navbar = () => {
     matrix,
     setMatrix,
     setProcessList,
+    playbackSpeed,
+    setPlaybackSpeed,
   } = useContext(MatrixContext);
 
   return (
@@ -89,7 +91,6 @@ export const Navbar = () => {
           disabled={isDisplayingAlgorithm}
           onChange={(event: any) => {
             setAlgorithmChoice(event.target.value);
-            console.log(event.target.value);
           }}
         >
           <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
@@ -115,7 +116,6 @@ export const Navbar = () => {
           disabled={isDisplayingAlgorithm}
           onChange={(event: any) => {
             setAlgorithmChoice(event.target.value);
-            console.log(event.target.value);
           }}
         >
           <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
@@ -133,24 +133,21 @@ export const Navbar = () => {
 
         <Select
           className={styles.playbackSelector}
-          value={AlgorithmChoice.BreadthFirstSearch}
+          value={playbackSpeed}
           disabled={isDisplayingAlgorithm}
           onChange={(event: any) => {
-            setAlgorithmChoice(event.target.value);
-            console.log(event.target.value);
+            setPlaybackSpeed(event.target.value);
           }}
         >
-          <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
-            Playback Speed
-          </MenuItem>
-          <MenuItem value={AlgorithmChoice.DepthFirstSearch}>0.25</MenuItem>
-          <MenuItem value={AlgorithmChoice.DepthFirstSearch}>0.5</MenuItem>
-          <MenuItem value={AlgorithmChoice.DepthFirstSearch}>0.75</MenuItem>
-          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>1.0</MenuItem>
-          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>1.25</MenuItem>
-          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>1.50</MenuItem>
-          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>1.75</MenuItem>
-          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>2.0</MenuItem>
+          <MenuItem disabled>Playback Speed</MenuItem>
+          <MenuItem value={PLAYBACK_SPEED['_0.25']}>0.25</MenuItem>
+          <MenuItem value={PLAYBACK_SPEED['_0.50']}>0.5</MenuItem>
+          <MenuItem value={PLAYBACK_SPEED['_0.75']}>0.75</MenuItem>
+          <MenuItem value={PLAYBACK_SPEED['_1.00']}>1.0</MenuItem>
+          <MenuItem value={PLAYBACK_SPEED['_1.25']}>1.25</MenuItem>
+          <MenuItem value={PLAYBACK_SPEED['_1.50']}>1.50</MenuItem>
+          <MenuItem value={PLAYBACK_SPEED['_1.75']}>1.75</MenuItem>
+          <MenuItem value={PLAYBACK_SPEED['_2.00']}>2.0</MenuItem>
         </Select>
 
         {!isDisplayingAlgorithm && (
