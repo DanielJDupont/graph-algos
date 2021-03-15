@@ -141,6 +141,8 @@ const MatrixProvider = ({ children }) => {
 
           return array;
         };
+
+        const directions = shuffleArray(['up', 'right', 'bottom', 'left']);
       };
     }
 
