@@ -102,6 +102,47 @@ const MatrixProvider = ({ children }) => {
     }
 
     // Recursive Maze
+    if (value === MAZE_GENERATOR.RECURSIVE_MAZE) {
+      const mazedMatrix = [...Array(20)].map((_, i) =>
+        [...Array(30)].map((_, j) => {
+          // Do depth first search in random directions, randomly pull from this list.
+          const directions = ['up', 'right', 'down', 'left'];
+          const direction = directions.splice(
+            Math.floor(Math.random() * directions.length),
+            1
+          );
+          return {
+            id: i + ' ' + j,
+            isVisited: false,
+            isWalled: false,
+          };
+        })
+      );
+
+      // Do not think maps will work here. need to use a function call to create frames.
+      const recursiveMaze = (i, j) => {
+        // Fisher-Yates (aka Knuth) Shuffle
+        const shuffleArray = (array) => {
+          var currentIndex = array.length,
+            temporaryValue,
+            randomIndex;
+
+          // While there remain elements to shuffle...
+          while (0 !== currentIndex) {
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+          }
+
+          return array;
+        };
+      };
+    }
 
     _setMazeGenerator(value);
   };
