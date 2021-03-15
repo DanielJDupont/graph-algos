@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 
 import {
   MouseMode,
@@ -61,6 +61,8 @@ const MatrixProvider = ({ children }) => {
     if (action === SET_SQUARE.START) _setStartSquareID(id);
     if (action === SET_SQUARE.END) _setEndSquareID(id);
   };
+
+  useEffect(() => {}, []);
 
   return (
     <MatrixContext.Provider
