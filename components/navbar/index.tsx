@@ -107,10 +107,10 @@ export const Navbar = () => {
           <MenuItem value={MAZE_GENERATOR.CLEAR}>Clear</MenuItem>
 
           <MenuItem value={MAZE_GENERATOR.RECURSIVE_MAZE}>
-            Random Recursive Maze
+            Recursive Maze
           </MenuItem>
 
-          <MenuItem value={MAZE_GENERATOR.SCATTER}>Random Scatter</MenuItem>
+          <MenuItem value={MAZE_GENERATOR.SCATTER}>Scatter</MenuItem>
         </Select>
 
         <Select

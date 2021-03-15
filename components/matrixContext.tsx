@@ -30,7 +30,7 @@ const MatrixProvider = ({ children }) => {
     AlgorithmChoice.ChooseYourAlgorithm
   );
 
-  const [mazeGenerator, setMazeGenerator] = useState<MAZE_GENERATOR>(
+  const [mazeGenerator, _setMazeGenerator] = useState<MAZE_GENERATOR>(
     MAZE_GENERATOR.GENERATE_WALLS
   );
 
@@ -62,7 +62,42 @@ const MatrixProvider = ({ children }) => {
     if (action === SET_SQUARE.END) _setEndSquareID(id);
   };
 
-  useEffect(() => {}, []);
+  const setMazeGenerator = (value: MAZE_GENERATOR) => {
+    if (value === MAZE_GENERATOR.CLEAR) {
+      setMatrix(
+        [...Array(20)].map((_, i) =>
+          [...Array(30)].map((_, j) => ({
+            id: i + ' ' + j,
+            isProcessed: false,
+            animated: false,
+            isBlocked: false,
+          }))
+        )
+      );
+    }
+
+    if (value === MAZE_GENERATOR.CLEAR) {
+      setMatrix(
+        [...Array(20)].map((_, i) =>
+          [...Array(30)].map((_, j) => {
+            // Generator a random number between 1 and 10 inclusive.
+            const randomInt = Math.floor(Math.random() * 10 + 1);
+
+            const isWall = randomInt === 1;
+
+            return {
+              id: i + ' ' + j,
+              isProcessed: isWall,
+              animated: false,
+              isBlocked: isWall,
+            };
+          })
+        )
+      );
+    }
+
+    _setMazeGenerator(value);
+  };
 
   return (
     <MatrixContext.Provider
