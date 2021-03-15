@@ -76,14 +76,17 @@ const MatrixProvider = ({ children }) => {
       );
     }
 
-    if (value === MAZE_GENERATOR.CLEAR) {
+    if (value === MAZE_GENERATOR.SCATTER) {
       setMatrix(
         [...Array(20)].map((_, i) =>
           [...Array(30)].map((_, j) => {
             // Generator a random number between 1 and 10 inclusive.
             const randomInt = Math.floor(Math.random() * 10 + 1);
 
-            const isWall = randomInt === 1;
+            const isWall =
+              randomInt === 1 &&
+              matrix[i][j].id !== startSquareID &&
+              matrix[i][j].id !== endSquareID;
 
             return {
               id: i + ' ' + j,
