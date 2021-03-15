@@ -93,7 +93,33 @@ export const Navbar = () => {
           }}
         >
           <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
-            Choose Your Algorithm
+            Generate Walls
+          </MenuItem>
+
+          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>
+            Clear All Walls
+          </MenuItem>
+
+          <MenuItem value={AlgorithmChoice.DepthFirstSearch}>
+            Random Recursive Maze
+          </MenuItem>
+
+          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>
+            Random Scatter
+          </MenuItem>
+        </Select>
+
+        <Select
+          className={styles.selector}
+          value={algorithmChoice}
+          disabled={isDisplayingAlgorithm}
+          onChange={(event: any) => {
+            setAlgorithmChoice(event.target.value);
+            console.log(event.target.value);
+          }}
+        >
+          <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
+            Select Algorithm
           </MenuItem>
 
           <MenuItem value={AlgorithmChoice.DepthFirstSearch}>
@@ -107,7 +133,7 @@ export const Navbar = () => {
 
         <Select
           className={styles.playbackSelector}
-          value={algorithmChoice}
+          value={AlgorithmChoice.BreadthFirstSearch}
           disabled={isDisplayingAlgorithm}
           onChange={(event: any) => {
             setAlgorithmChoice(event.target.value);
