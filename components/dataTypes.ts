@@ -76,3 +76,9 @@ export enum PLAYBACK_SPEED {
   '_1.75' = 1.75,
   '_2.00' = 2.0,
 }
+
+export enum MAZE_GENERATOR {
+  CLEAR_ALL_WALLS,
+  RECURSIVE_MAZE,
+  SCATTER,
+}

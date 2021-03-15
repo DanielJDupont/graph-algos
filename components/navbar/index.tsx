@@ -5,7 +5,7 @@ import { AlgorithmChoice, MouseMode, PLAYBACK_SPEED } from '../dataTypes';
 import { depthFirstSearch, breadthFirstSearch } from '../matrix/algorithms';
 import { MatrixContext } from '../matrixContext';
 
-import { Button, MenuItem, Select, Tooltip, Slider } from '@material-ui/core';
+import { Button, MenuItem, Select, Tooltip } from '@material-ui/core';
 import {
   PlayCircleOutline,
   FlagOutlined,
