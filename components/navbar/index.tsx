@@ -5,7 +5,7 @@ import { AlgorithmChoice, MouseMode } from '../dataTypes';
 import { depthFirstSearch, breadthFirstSearch } from '../matrix/algorithms';
 import { MatrixContext } from '../matrixContext';
 
-import { Button, MenuItem, Select, Tooltip } from '@material-ui/core';
+import { Button, MenuItem, Select, Tooltip, Slider } from '@material-ui/core';
 import {
   PlayCircleOutline,
   FlagOutlined,
@@ -103,6 +103,28 @@ export const Navbar = () => {
           <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>
             Breadth First Search
           </MenuItem>
+        </Select>
+
+        <Select
+          className={styles.playbackSelector}
+          value={algorithmChoice}
+          disabled={isDisplayingAlgorithm}
+          onChange={(event: any) => {
+            setAlgorithmChoice(event.target.value);
+            console.log(event.target.value);
+          }}
+        >
+          <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
+            Playback Speed
+          </MenuItem>
+          <MenuItem value={AlgorithmChoice.DepthFirstSearch}>0.25</MenuItem>
+          <MenuItem value={AlgorithmChoice.DepthFirstSearch}>0.5</MenuItem>
+          <MenuItem value={AlgorithmChoice.DepthFirstSearch}>0.75</MenuItem>
+          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>1.0</MenuItem>
+          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>1.25</MenuItem>
+          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>1.50</MenuItem>
+          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>1.75</MenuItem>
+          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>2.0</MenuItem>
         </Select>
 
         {!isDisplayingAlgorithm && (
