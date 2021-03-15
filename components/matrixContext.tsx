@@ -7,6 +7,7 @@ import {
   IMatrixContext,
   SET_SQUARE,
   PLAYBACK_SPEED,
+  MAZE_GENERATOR,
 } from './dataTypes';
 
 const MatrixContext = createContext<IMatrixContext>(null);
@@ -27,6 +28,10 @@ const MatrixProvider = ({ children }) => {
   // The choice of algorithm in the algorithms.ts file in the matrix directory.
   const [algorithmChoice, setAlgorithmChoice] = useState(
     AlgorithmChoice.ChooseYourAlgorithm
+  );
+
+  const [mazeGenerator, setMazeGenerator] = useState<MAZE_GENERATOR>(
+    MAZE_GENERATOR.GENERATE_WALLS
   );
 
   // This matrix is used for performing computations.
@@ -88,6 +93,10 @@ const MatrixProvider = ({ children }) => {
         // Playback Speed
         playbackSpeed,
         setPlaybackSpeed,
+
+        // Maze Generator
+        mazeGenerator,
+        setMazeGenerator,
       }}
     >
       {children}

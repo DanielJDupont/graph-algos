@@ -1,7 +1,12 @@
 import { useContext } from 'react';
 import clsx from 'clsx';
 
-import { AlgorithmChoice, MouseMode, PLAYBACK_SPEED } from '../dataTypes';
+import {
+  AlgorithmChoice,
+  MAZE_GENERATOR,
+  MouseMode,
+  PLAYBACK_SPEED,
+} from '../dataTypes';
 import { depthFirstSearch, breadthFirstSearch } from '../matrix/algorithms';
 import { MatrixContext } from '../matrixContext';
 
@@ -30,6 +35,8 @@ export const Navbar = () => {
     setProcessList,
     playbackSpeed,
     setPlaybackSpeed,
+    mazeGenerator,
+    setMazeGenerator,
   } = useContext(MatrixContext);
 
   return (
@@ -87,27 +94,23 @@ export const Navbar = () => {
 
         <Select
           className={styles.selector}
-          value={algorithmChoice}
+          value={mazeGenerator}
           disabled={isDisplayingAlgorithm}
           onChange={(event: any) => {
-            setAlgorithmChoice(event.target.value);
+            setMazeGenerator(event.target.value);
           }}
         >
-          <MenuItem value={AlgorithmChoice.ChooseYourAlgorithm} disabled>
+          <MenuItem value={MAZE_GENERATOR.GENERATE_WALLS} disabled>
             Generate Walls
           </MenuItem>
 
-          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>
-            Clear All Walls
-          </MenuItem>
+          <MenuItem value={MAZE_GENERATOR.CLEAR}>Clear</MenuItem>
 
-          <MenuItem value={AlgorithmChoice.DepthFirstSearch}>
+          <MenuItem value={MAZE_GENERATOR.RECURSIVE_MAZE}>
             Random Recursive Maze
           </MenuItem>
 
-          <MenuItem value={AlgorithmChoice.BreadthFirstSearch}>
-            Random Scatter
-          </MenuItem>
+          <MenuItem value={MAZE_GENERATOR.SCATTER}>Random Scatter</MenuItem>
         </Select>
 
         <Select

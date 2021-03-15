@@ -58,6 +58,9 @@ export interface IMatrixContext {
   // Playback speed.
   playbackSpeed: PLAYBACK_SPEED;
   setPlaybackSpeed: Dispatch<SetStateAction<PLAYBACK_SPEED>>;
+
+  mazeGenerator: MAZE_GENERATOR;
+  setMazeGenerator: Dispatch<SetStateAction<MAZE_GENERATOR>>;
 }
 
 // Actions for setting the id of the start and end squares.
@@ -78,7 +81,8 @@ export enum PLAYBACK_SPEED {
 }
 
 export enum MAZE_GENERATOR {
-  CLEAR_ALL_WALLS,
+  GENERATE_WALLS,
+  CLEAR,
   RECURSIVE_MAZE,
   SCATTER,
 }
