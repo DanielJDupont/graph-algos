@@ -17,18 +17,18 @@ const MatrixProvider = ({ children }) => {
   const { width, height } = useWindowSize();
 
   const [rowLength, setRowLength] = useState(
-    width ? Math.floor(height / 50) : 20
+    width ? Math.floor(height / 40) : 20
   );
   const [colLength, setColLength] = useState(
-    height ? Math.floor(width / 50) : 30
+    height ? Math.floor(width / 40) : 30
   );
 
   useEffect(() => {
-    setColLength(width ? Math.floor(width / 50) : 30);
+    setColLength(width ? Math.floor(width / 40) : 30);
   }, [width, setColLength]);
 
   useEffect(() => {
-    setColLength(width ? Math.floor(width / 50) : 30);
+    setColLength(width ? Math.floor(width / 40) : 30);
   }, []);
 
   // Is running the animation.
