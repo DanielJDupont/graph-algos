@@ -13,6 +13,9 @@
   width: 300px;
   transform: translateX(-85%);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: rgb(245, 245, 245);
+
+  z-index: 1;
 }
 
 .openContainer {
@@ -30,6 +33,9 @@
   width: 300px;
   transform: translateX(0%);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: rgb(255, 255, 255);
+
+  z-index: 1;
 }
 
 .topContainer {
