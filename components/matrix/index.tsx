@@ -5,6 +5,7 @@ import { InputMatrix } from './InputMatrix';
 import { OutputMatrix } from './OutputMatrix';
 
 import styles from './index.module.scss';
+import { useWindowSize } from '../hooks/windowSize';
 
 export const Matrix = () => {
   const { isDisplayingAlgorithm } = useContext(MatrixContext);

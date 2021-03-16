@@ -15,7 +15,7 @@
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   background-color: rgb(245, 245, 245);
 
-  z-index: 1;
+  z-index: 10;
 }
 
 .openContainer {
@@ -35,7 +35,7 @@
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   background-color: rgb(255, 255, 255);
 
-  z-index: 1;
+  z-index: 10;
 }
 
 .topContainer {

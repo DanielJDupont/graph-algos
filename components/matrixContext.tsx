@@ -9,10 +9,28 @@ import {
   PLAYBACK_SPEED,
   MAZE_GENERATOR,
 } from './dataTypes';
+import { useWindowSize } from './hooks/windowSize';
 
 const MatrixContext = createContext<IMatrixContext>(null);
 
 const MatrixProvider = ({ children }) => {
+  const { width, height } = useWindowSize();
+
+  const [rowLength, setRowLength] = useState(
+    width ? Math.floor(height / 50) : 20
+  );
+  const [colLength, setColLength] = useState(
+    height ? Math.floor(width / 50) : 30
+  );
+
+  useEffect(() => {
+    setColLength(width ? Math.floor(width / 50) : 30);
+  }, [width, setColLength]);
+
+  useEffect(() => {
+    setColLength(width ? Math.floor(width / 50) : 30);
+  }, []);
+
   // Is running the animation.
   const [isDisplayingAlgorithm, setIsDisplayingAlgorithm] = useState(false);
 
@@ -36,8 +54,8 @@ const MatrixProvider = ({ children }) => {
 
   // This matrix is used for performing computations.
   const [matrix, setMatrix] = useState<Square[][]>(
-    [...Array(20)].map((_, i) =>
-      [...Array(30)].map((_, j) => ({
+    [...Array(rowLength)].map((_, i) =>
+      [...Array(colLength)].map((_, j) => ({
         id: i + ' ' + j,
         isProcessed: false,
         animated: false,
@@ -45,6 +63,20 @@ const MatrixProvider = ({ children }) => {
       }))
     )
   );
+
+  // Regenerate the matrix every time there is a screen size change.
+  useEffect(() => {
+    setMatrix(
+      [...Array(rowLength)].map((_, i) =>
+        [...Array(colLength)].map((_, j) => ({
+          id: i + ' ' + j,
+          isProcessed: false,
+          animated: false,
+          isBlocked: false,
+        }))
+      )
+    );
+  }, [width, height]);
 
   // 1D List of the order in which the square IDs were visited from first to last.
   const [processList, setProcessList] = useState<string[]>([]);
@@ -66,8 +98,8 @@ const MatrixProvider = ({ children }) => {
     // Clear
     if (value === MAZE_GENERATOR.CLEAR) {
       setMatrix(
-        [...Array(20)].map((_, i) =>
-          [...Array(30)].map((_, j) => ({
+        [...Array(rowLength)].map((_, i) =>
+          [...Array(colLength)].map((_, j) => ({
             id: i + ' ' + j,
             isProcessed: false,
             animated: false,
@@ -80,8 +112,8 @@ const MatrixProvider = ({ children }) => {
     // Scatter
     if (value === MAZE_GENERATOR.SCATTER) {
       setMatrix(
-        [...Array(20)].map((_, i) =>
-          [...Array(30)].map((_, j) => {
+        [...Array(rowLength)].map((_, i) =>
+          [...Array(colLength)].map((_, j) => {
             // Generator a random number between 1 and 10 inclusive.
             const randomInt = Math.floor(Math.random() * 10 + 1);
 
@@ -104,7 +136,7 @@ const MatrixProvider = ({ children }) => {
     // Recursive Maze
     if (value === MAZE_GENERATOR.RECURSIVE_MAZE) {
       const mazedMatrix = [...Array(20)].map((_, i) =>
-        [...Array(30)].map((_, j) => {
+        [...Array(colLength)].map((_, j) => {
           // Do depth first search in random directions, randomly pull from this list.
           const directions = ['up', 'right', 'down', 'left'];
           const direction = directions.splice(
