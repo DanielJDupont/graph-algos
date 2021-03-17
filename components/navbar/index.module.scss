@@ -5,6 +5,8 @@
   height: 60px;
   background-color: #3276d2;
   position: relative;
+  // Keep above the shadow of the sidebar.
+  z-index: 20;
 
   .navbarTitle {
     cursor: default;

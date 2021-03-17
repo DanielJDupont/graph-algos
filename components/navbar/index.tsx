@@ -21,7 +21,7 @@ import {
 
 import styles from './index.module.scss';
 
-export const Navbar = () => {
+export const Navbar: React.FC = () => {
   const {
     mouseMode,
     setMouseMode,

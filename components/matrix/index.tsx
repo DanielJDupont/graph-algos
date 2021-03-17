@@ -7,7 +7,7 @@ import { OutputMatrix } from './OutputMatrix';
 import styles from './index.module.scss';
 import { useWindowSize } from '../hooks/windowSize';
 
-export const Matrix = () => {
+export const Matrix: React.FC = () => {
   const { isDisplayingAlgorithm } = useContext(MatrixContext);
 
   return (

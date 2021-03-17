@@ -5,7 +5,7 @@ import { KeyboardArrowRight, KeyboardArrowLeft } from '@material-ui/icons';
 
 import styles from './index.module.scss';
 
-export const Sidebar = () => {
+export const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (

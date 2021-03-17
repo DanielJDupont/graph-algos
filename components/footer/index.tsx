@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 
-export const Footer = () => {
+export const Footer: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.createdBy}>Daniel Dupont | Graph Algos © 2020</div>

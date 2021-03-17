@@ -8,7 +8,7 @@ import { DirectionsRun } from '@material-ui/icons';
 
 import styles from './OutputMatrix.module.scss';
 
-export const OutputMatrix: React.FC<{}> = () => {
+export const OutputMatrix: React.FC = () => {
   const { startSquareID, endSquareID, processList, matrix } = useContext(
     MatrixContext
   );

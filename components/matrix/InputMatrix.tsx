@@ -8,7 +8,7 @@ import { DirectionsRun } from '@material-ui/icons';
 
 import styles from './InputMatrix.module.scss';
 
-export const InputMatrix: React.FC<{}> = () => {
+export const InputMatrix: React.FC = () => {
   const {
     matrix,
     startSquareID,

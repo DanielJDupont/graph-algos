@@ -5,6 +5,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  // z-index only works on positioned elements, keep the footer above the drop shadow of the sidebar.
+  position: fixed;
+  z-index: 20;
 
   .createdBy {
     color: rgb(235, 235, 235);
