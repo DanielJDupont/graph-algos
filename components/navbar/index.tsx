@@ -166,30 +166,7 @@ export const Navbar: React.FC = () => {
             <MenuItem value={PLAYBACK_SPEED['_2.00']}>2.0</MenuItem>
           </Select>
 
-          {!isDisplayingAlgorithm && (
-            <Button
-              className={styles.button}
-              variant="contained"
-              disabled={
-                algorithmChoice === AlgorithmChoice.ChooseYourAlgorithm ||
-                isDisplayingAlgorithm
-              }
-              onClick={() => {
-                if (algorithmChoice === AlgorithmChoice.BreadthFirstSearch) {
-                  breadthFirstSearch(startSquareID, matrix, setProcessList);
-                } else if (
-                  algorithmChoice === AlgorithmChoice.DepthFirstSearch
-                ) {
-                  depthFirstSearch(startSquareID, matrix, setProcessList);
-                }
-
-                setIsDisplayingAlgorithm(true);
-              }}
-            >
-              <PlayCircleOutline className={styles.icon} />
-              Start Animation
-            </Button>
-          )}
+          {!isDisplayingAlgorithm && <StartAnimationButton />}
 
           {isDisplayingAlgorithm && (
             <Button

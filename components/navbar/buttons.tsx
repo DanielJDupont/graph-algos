@@ -2,14 +2,15 @@ import { useContext } from 'react';
 import clsx from 'clsx';
 
 import { MatrixContext } from '../matrixContext';
-import { MouseMode } from '../dataTypes';
+import { breadthFirstSearch, depthFirstSearch } from '../matrix/algorithms';
+import { AlgorithmChoice, MouseMode } from '../dataTypes';
 
-import { DirectionsRunOutlined } from '@material-ui/icons';
+import { DirectionsRunOutlined, PlayCircleOutline } from '@material-ui/icons';
 import { Tooltip, Button } from '@material-ui/core';
 
 import styles from './buttons.module.scss';
 
-export const StartAnimationButton = () => {
+export const StartingPointButton: React.FC = () => {
   const { mouseMode, setMouseMode, isDisplayingAlgorithm } = useContext(
     MatrixContext
   );
@@ -35,5 +36,39 @@ export const StartAnimationButton = () => {
         Starting Point
       </Button>
     </Tooltip>
+  );
+};
+
+export const StartAnimationButton: React.FC = () => {
+  const {
+    algorithmChoice,
+    isDisplayingAlgorithm,
+    setIsDisplayingAlgorithm,
+    startSquareID,
+    matrix,
+    setProcessList,
+  } = useContext(MatrixContext);
+
+  return (
+    <Button
+      className={styles.button}
+      variant="contained"
+      disabled={
+        algorithmChoice === AlgorithmChoice.ChooseYourAlgorithm ||
+        isDisplayingAlgorithm
+      }
+      onClick={() => {
+        if (algorithmChoice === AlgorithmChoice.BreadthFirstSearch) {
+          breadthFirstSearch(startSquareID, matrix, setProcessList);
+        } else if (algorithmChoice === AlgorithmChoice.DepthFirstSearch) {
+          depthFirstSearch(startSquareID, matrix, setProcessList);
+        }
+
+        setIsDisplayingAlgorithm(true);
+      }}
+    >
+      <PlayCircleOutline className={styles.icon} />
+      Start Animation
+    </Button>
   );
 };
