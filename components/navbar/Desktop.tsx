@@ -1,3 +1,3 @@
 export const Desktop: React.FC = () => {
-  return <div />;
+  return <div></div>;
 };

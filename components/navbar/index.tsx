@@ -9,16 +9,10 @@ import {
 } from '../dataTypes';
 import { depthFirstSearch, breadthFirstSearch } from '../matrix/algorithms';
 import { MatrixContext } from '../matrixContext';
+import { useWindowSize } from '../hooks/windowSize';
+import { StartAnimationButton } from './buttons';
 
-import { withStyles } from '@material-ui/core/styles';
-import {
-  Button,
-  MenuItem,
-  Select,
-  Tooltip,
-  Menu,
-  MenuProps,
-} from '@material-ui/core';
+import { Button, MenuItem, Select, Tooltip, Menu } from '@material-ui/core';
 import {
   PlayCircleOutline,
   FlagOutlined,
@@ -28,7 +22,6 @@ import {
 } from '@material-ui/icons';
 
 import styles from './index.module.scss';
-import { useWindowSize } from '../hooks/windowSize';
 
 export const Navbar: React.FC = () => {
   const {
@@ -355,33 +348,7 @@ export const Navbar: React.FC = () => {
               </Select>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              {!isDisplayingAlgorithm && (
-                <Button
-                  className={styles.button}
-                  variant="contained"
-                  disabled={
-                    algorithmChoice === AlgorithmChoice.ChooseYourAlgorithm ||
-                    isDisplayingAlgorithm
-                  }
-                  onClick={() => {
-                    if (
-                      algorithmChoice === AlgorithmChoice.BreadthFirstSearch
-                    ) {
-                      breadthFirstSearch(startSquareID, matrix, setProcessList);
-                    } else if (
-                      algorithmChoice === AlgorithmChoice.DepthFirstSearch
-                    ) {
-                      depthFirstSearch(startSquareID, matrix, setProcessList);
-                    }
-
-                    setIsDisplayingAlgorithm(true);
-                  }}
-                >
-                  <PlayCircleOutline className={styles.icon} />
-                  Start Animation
-                </Button>
-              )}
-
+              {!isDisplayingAlgorithm && <StartAnimationButton />}
               {isDisplayingAlgorithm && (
                 <Button
                   className={clsx(styles.button)}
