@@ -9,9 +9,13 @@ import { DirectionsRun } from '@material-ui/icons';
 import styles from './OutputMatrix.module.scss';
 
 export const OutputMatrix: React.FC = () => {
-  const { startSquareID, endSquareID, processList, matrix } = useContext(
-    MatrixContext
-  );
+  const {
+    startSquareID,
+    endSquareID,
+    processList,
+    matrix,
+    playbackSpeed,
+  } = useContext(MatrixContext);
 
   // Delete all squares that occur after the end square.
   const filteredProcessList = processList.slice(
@@ -26,12 +30,15 @@ export const OutputMatrix: React.FC = () => {
         id: square.id,
         animated: square.isBlocked
           ? false
-          : filteredProcessList.findIndex((id) => id === square.id) * 50 >= 0,
+          : filteredProcessList.findIndex((id) => id === square.id) >= 0,
         isBlocked: square.isBlocked,
         isProcessed: square.isProcessed,
         delay: square.isBlocked
           ? -1
-          : filteredProcessList.findIndex((id) => id === square.id) * 50,
+          : // Alter this to set the algorithm speed.
+            filteredProcessList.findIndex((id) => id === square.id) *
+            50 *
+            (1 / playbackSpeed),
       };
     })
   );
