@@ -10,7 +10,11 @@ import {
 import { depthFirstSearch, breadthFirstSearch } from '../matrix/algorithms';
 import { MatrixContext } from '../matrixContext';
 import { useWindowSize } from '../hooks/windowSize';
-import { StartAnimationButton } from './buttons';
+import {
+  EndingPointButton,
+  StartAnimationButton,
+  StartingPointButton,
+} from './buttons';
 
 import { Button, MenuItem, Select, Tooltip, Menu } from '@material-ui/core';
 import {
@@ -57,53 +61,8 @@ export const Navbar: React.FC = () => {
       <div className={styles.navbarTitle}>Graph Algos</div>
       {width >= 1220 ? (
         <div className={styles.controlsContainer}>
-          <Tooltip
-            title="Set the starting point of the algorithm!"
-            enterDelay={300}
-          >
-            <Button
-              className={clsx(
-                styles.button,
-                mouseMode === MouseMode.StartingPoint && styles.buttonActive
-              )}
-              disabled={isDisplayingAlgorithm}
-              variant="contained"
-              onClick={() => {
-                if (mouseMode !== MouseMode.StartingPoint) {
-                  setMouseMode(MouseMode.StartingPoint);
-                } else if (mouseMode === MouseMode.StartingPoint) {
-                  setMouseMode(MouseMode.NormalPoint);
-                }
-              }}
-            >
-              <DirectionsRunOutlined className={styles.icon} />
-              Starting Point
-            </Button>
-          </Tooltip>
-
-          <Tooltip
-            title="Click to set a square where the algorithm will end!"
-            enterDelay={300}
-          >
-            <Button
-              className={clsx(
-                styles.button,
-                mouseMode === MouseMode.EndingPoint && styles.buttonActive
-              )}
-              disabled={isDisplayingAlgorithm}
-              variant="contained"
-              onClick={() => {
-                if (mouseMode !== MouseMode.EndingPoint) {
-                  setMouseMode(MouseMode.EndingPoint);
-                } else if (mouseMode === MouseMode.EndingPoint) {
-                  setMouseMode(MouseMode.NormalPoint);
-                }
-              }}
-            >
-              <FlagOutlined className={styles.icon} />
-              Ending Point
-            </Button>
-          </Tooltip>
+          <StartingPointButton />
+          <EndingPointButton />
 
           <Select
             className={styles.selector}
@@ -217,45 +176,11 @@ export const Navbar: React.FC = () => {
             onClose={handleClose}
           >
             <MenuItem onClick={handleClose}>
-              <Button
-                className={clsx(
-                  styles.button,
-                  mouseMode === MouseMode.StartingPoint && styles.buttonActive
-                )}
-                disabled={isDisplayingAlgorithm}
-                variant="contained"
-                onClick={() => {
-                  if (mouseMode !== MouseMode.StartingPoint) {
-                    setMouseMode(MouseMode.StartingPoint);
-                  } else if (mouseMode === MouseMode.StartingPoint) {
-                    setMouseMode(MouseMode.NormalPoint);
-                  }
-                }}
-              >
-                <DirectionsRunOutlined className={styles.icon} />
-                Starting Point
-              </Button>
+              <StartingPointButton />
             </MenuItem>
 
             <MenuItem onClick={handleClose}>
-              <Button
-                className={clsx(
-                  styles.button,
-                  mouseMode === MouseMode.EndingPoint && styles.buttonActive
-                )}
-                disabled={isDisplayingAlgorithm}
-                variant="contained"
-                onClick={() => {
-                  if (mouseMode !== MouseMode.EndingPoint) {
-                    setMouseMode(MouseMode.EndingPoint);
-                  } else if (mouseMode === MouseMode.EndingPoint) {
-                    setMouseMode(MouseMode.NormalPoint);
-                  }
-                }}
-              >
-                <FlagOutlined className={styles.icon} />
-                Ending Point
-              </Button>
+              <EndingPointButton />
             </MenuItem>
 
             <MenuItem onClick={handleClose}>
@@ -324,6 +249,7 @@ export const Navbar: React.FC = () => {
                 <MenuItem value={PLAYBACK_SPEED['_2.00']}>2.0</MenuItem>
               </Select>
             </MenuItem>
+
             <MenuItem onClick={handleClose}>
               {!isDisplayingAlgorithm && <StartAnimationButton />}
               {isDisplayingAlgorithm && (

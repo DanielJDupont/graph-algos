@@ -5,7 +5,11 @@ import { MatrixContext } from '../matrixContext';
 import { breadthFirstSearch, depthFirstSearch } from '../matrix/algorithms';
 import { AlgorithmChoice, MouseMode } from '../dataTypes';
 
-import { DirectionsRunOutlined, PlayCircleOutline } from '@material-ui/icons';
+import {
+  DirectionsRunOutlined,
+  FlagOutlined,
+  PlayCircleOutline,
+} from '@material-ui/icons';
 import { Tooltip, Button } from '@material-ui/core';
 
 import styles from './buttons.module.scss';
@@ -34,6 +38,38 @@ export const StartingPointButton: React.FC = () => {
       >
         <DirectionsRunOutlined className={styles.icon} />
         Starting Point
+      </Button>
+    </Tooltip>
+  );
+};
+
+export const EndingPointButton: React.FC = () => {
+  const { mouseMode, setMouseMode, isDisplayingAlgorithm } = useContext(
+    MatrixContext
+  );
+
+  return (
+    <Tooltip
+      title="Click to set a square where the algorithm will end!"
+      enterDelay={300}
+    >
+      <Button
+        className={clsx(
+          styles.button,
+          mouseMode === MouseMode.EndingPoint && styles.buttonActive
+        )}
+        disabled={isDisplayingAlgorithm}
+        variant="contained"
+        onClick={() => {
+          if (mouseMode !== MouseMode.EndingPoint) {
+            setMouseMode(MouseMode.EndingPoint);
+          } else if (mouseMode === MouseMode.EndingPoint) {
+            setMouseMode(MouseMode.NormalPoint);
+          }
+        }}
+      >
+        <FlagOutlined className={styles.icon} />
+        Ending Point
       </Button>
     </Tooltip>
   );
