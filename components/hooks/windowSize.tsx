@@ -1,20 +1,15 @@
 import { useState, useEffect } from 'react';
 
-// Usage
-// function App() {
-//   const size = useWindowSize();
+interface WindowDimensions {
+  width: number;
+  height: number;
+}
 
-//   return (
-//     <div>
-//       {size.width}px / {size.height}px
-//     </div>
-//   );
-// }
-
-export const useWindowSize = () => {
+// Hooks look like React.FC but they actually return a value that is not just JSX for rendering.
+export const useWindowSize = (): WindowDimensions => {
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = useState({
+  const [windowSize, setWindowSize] = useState<WindowDimensions>({
     width: undefined,
     height: undefined,
   });
