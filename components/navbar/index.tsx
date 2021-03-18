@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 
 import { MatrixContext } from '../matrixContext';
-import { getWindowDimensions } from '../hooks/windowDimensions';
 import {
   EndingPointButton,
   ResetButton,
