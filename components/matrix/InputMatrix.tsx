@@ -39,7 +39,11 @@ export const InputMatrix: React.FC = () => {
 
                   // Click to add or remove walls.
                   else {
-                    if (square.id === startSquareID || endSquareID) return;
+                    if (
+                      square.id === startSquareID ||
+                      square.id === endSquareID
+                    )
+                      return;
                     setMatrix(
                       matrix.map((row) =>
                         row.map((_square) => {
