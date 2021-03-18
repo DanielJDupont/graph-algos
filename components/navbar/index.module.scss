@@ -17,67 +17,6 @@
     margin-right: 20px;
   }
 
-  .selector {
-    color: white;
-    margin: 0 5px;
-    width: 150px;
-    svg {
-      color: white;
-    }
-
-    &:hover:not(.Mui-disabled):before {
-      border-color: rgb(220, 220, 220) !important;
-    }
-
-    &:before {
-      border-color: rgb(215, 215, 215);
-    }
-
-    &:after {
-      border-color: rgb(215, 215, 215);
-    }
-  }
-
-  .playbackSelector {
-    color: white;
-    margin: 0 5px;
-    width: 60px;
-    svg {
-      color: white;
-    }
-
-    &:hover:not(.Mui-disabled):before {
-      border-color: rgb(220, 220, 220) !important;
-    }
-
-    &:before {
-      border-color: rgb(215, 215, 215);
-    }
-
-    &:after {
-      border-color: rgb(215, 215, 215);
-    }
-  }
-
-  .button {
-    text-transform: none !important;
-    color: white;
-    background-color: #3b89da !important;
-    margin: 0 5px;
-    width: 160px;
-
-    &.buttonActive {
-      background-color: #67aaf1 !important;
-      color: white;
-      font-weight: 600 !important;
-    }
-
-    .icon {
-      margin-right: 5px;
-      font-size: 20px;
-    }
-  }
-
   .github {
     display: flex;
     align-items: center;
