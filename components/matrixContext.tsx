@@ -225,6 +225,10 @@ const MatrixProvider = ({ children }) => {
         // Maze Generator
         mazeGenerator,
         setMazeGenerator,
+
+        // Screen Width and Height
+        width,
+        height,
       }}
     >
       {children}

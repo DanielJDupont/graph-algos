@@ -61,6 +61,9 @@ export interface IMatrixContext {
 
   mazeGenerator: MAZE_GENERATOR;
   setMazeGenerator: Dispatch<SetStateAction<MAZE_GENERATOR>>;
+
+  width: number;
+  height: number;
 }
 
 // Actions for setting the id of the start and end squares.

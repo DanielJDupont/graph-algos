@@ -14,15 +14,22 @@ import {
   PlaybackSpeedSelector,
 } from './inputElements/selectors';
 
-import { Button, MenuItem, Menu } from '@material-ui/core';
+import { Button, MenuItem, Menu, makeStyles, Theme } from '@material-ui/core';
 import { GitHub } from '@material-ui/icons';
 
 import styles from './index.module.scss';
 
-export const Navbar: React.FC = () => {
-  const { isDisplayingAlgorithm } = useContext(MatrixContext);
+const useStyles = makeStyles((theme: Theme) => ({
+  menu: {
+    backgroundColor: 'rgba(31, 59, 68, 0.5)',
+    '& .MuiPaper-root': {
+      backgroundColor: '#3276d2',
+    },
+  },
+}));
 
-  const { width } = getWindowDimensions();
+export const Navbar: React.FC = () => {
+  const { isDisplayingAlgorithm, width } = useContext(MatrixContext);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -50,6 +57,7 @@ export const Navbar: React.FC = () => {
         // Mobile view inputs.
         <>
           <Button
+            className={styles.controlsButton}
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={handleClick}
@@ -58,6 +66,7 @@ export const Navbar: React.FC = () => {
           </Button>
           <Menu
             id="controlsMenu"
+            className={useStyles().menu}
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
@@ -97,7 +106,7 @@ export const Navbar: React.FC = () => {
       <a href="https://github.com/DanielJDupont/graph-algos" target="_blank">
         <div className={styles.github}>
           <GitHub className={styles.githubIcon} />
-          <div>View On Github</div>
+          {width >= 500 && <div>View On Github</div>}
         </div>
       </a>
     </div>
