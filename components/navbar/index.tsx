@@ -4,32 +4,24 @@ import clsx from 'clsx';
 import { MatrixContext } from '../matrixContext';
 import { useWindowSize } from '../hooks/windowSize';
 import {
-  AlgorithmSelector,
   EndingPointButton,
-  MazeGeneratorSelector,
-  PlaybackSpeedSelector,
   ResetButton,
   StartAnimationButton,
   StartingPointButton,
-} from './inputElements/inputElements';
+} from './inputElements/buttons';
+import {
+  AlgorithmSelector,
+  MazeGeneratorSelector,
+  PlaybackSpeedSelector,
+} from './inputElements/selectors';
 
 import { Button, MenuItem, Menu } from '@material-ui/core';
-import { ReplayOutlined, GitHub } from '@material-ui/icons';
+import { GitHub } from '@material-ui/icons';
 
 import styles from './index.module.scss';
 
 export const Navbar: React.FC = () => {
-  const {
-    isDisplayingAlgorithm,
-    setIsDisplayingAlgorithm,
-    algorithmChoice,
-    setAlgorithmChoice,
-    matrix,
-    setMatrix,
-    setProcessList,
-    playbackSpeed,
-    setPlaybackSpeed,
-  } = useContext(MatrixContext);
+  const { isDisplayingAlgorithm } = useContext(MatrixContext);
 
   const { width } = useWindowSize();
 
