@@ -1,0 +1,3 @@
+To upload to codecov:
+yarn jest --coverage
+bash <(curl -s https://codecov.io/bash) -Z -t TOKEN_HERE
