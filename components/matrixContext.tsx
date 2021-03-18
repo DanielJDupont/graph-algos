@@ -9,12 +9,12 @@ import {
   PLAYBACK_SPEED,
   MAZE_GENERATOR,
 } from './dataTypes';
-import { useWindowSize } from './hooks/windowSize';
+import { getWindowDimensions } from './hooks/windowDimensions';
 
 const MatrixContext = createContext<IMatrixContext>(null);
 
 const MatrixProvider = ({ children }) => {
-  const { width, height } = useWindowSize();
+  const { width, height } = getWindowDimensions();
 
   const [rowLength, setRowLength] = useState(
     width ? Math.floor(height / 40) : 20
@@ -24,11 +24,19 @@ const MatrixProvider = ({ children }) => {
   );
 
   useEffect(() => {
-    setColLength(width ? Math.floor(width / 40) : 30);
+    setColLength(width ? Math.floor(width / 45) : 30);
   }, [width, setColLength]);
 
   useEffect(() => {
-    setColLength(width ? Math.floor(width / 40) : 30);
+    setColLength(width ? Math.floor(width / 45) : 30);
+  }, []);
+
+  useEffect(() => {
+    setRowLength(height ? Math.floor(height / 45) : 30);
+  }, [height, setRowLength]);
+
+  useEffect(() => {
+    setRowLength(height ? Math.floor(height / 45) : 30);
   }, []);
 
   // Is running the animation.

@@ -1,8 +1,7 @@
 import { useContext, useState } from 'react';
-import clsx from 'clsx';
 
 import { MatrixContext } from '../matrixContext';
-import { useWindowSize } from '../hooks/windowSize';
+import { getWindowDimensions } from '../hooks/windowDimensions';
 import {
   EndingPointButton,
   ResetButton,
@@ -23,7 +22,7 @@ import styles from './index.module.scss';
 export const Navbar: React.FC = () => {
   const { isDisplayingAlgorithm } = useContext(MatrixContext);
 
-  const { width } = useWindowSize();
+  const { width } = getWindowDimensions();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
