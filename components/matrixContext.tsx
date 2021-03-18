@@ -1,4 +1,5 @@
 import { useState, createContext, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 
 import {
   MouseMode,
@@ -17,26 +18,26 @@ const MatrixProvider = ({ children }) => {
   const { width, height } = getWindowDimensions();
 
   const [rowLength, setRowLength] = useState(
-    width ? Math.floor(height / 40) : 20
+    width ? Math.floor(height / 50) : 20
   );
   const [colLength, setColLength] = useState(
-    height ? Math.floor(width / 40) : 30
+    height ? Math.floor(width / 50) : 30
   );
 
   useEffect(() => {
-    setColLength(width ? Math.floor(width / 45) : 30);
+    setColLength(width ? Math.floor(width / 50) : 30);
   }, [width, setColLength]);
 
   useEffect(() => {
-    setColLength(width ? Math.floor(width / 45) : 30);
+    setColLength(width ? Math.floor(width / 50) : 30);
   }, []);
 
   useEffect(() => {
-    setRowLength(height ? Math.floor(height / 45) : 30);
+    setRowLength(height ? Math.floor(height / 50) : 30);
   }, [height, setRowLength]);
 
   useEffect(() => {
-    setRowLength(height ? Math.floor(height / 45) : 30);
+    setRowLength(height ? Math.floor(height / 50) : 30);
   }, []);
 
   // Is running the animation.
@@ -231,4 +232,4 @@ const MatrixProvider = ({ children }) => {
   );
 };
 
-export { MatrixContext, MatrixProvider };
+export { MatrixProvider as default, MatrixContext };
