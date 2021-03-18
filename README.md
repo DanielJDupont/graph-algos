@@ -1,5 +1,8 @@
 # Interactive Graph Algorithm Visualizer
 
+![GitHub](https://img.shields.io/github/license/danieljdupont/graph-algos) ![Website](https://img.shields.io/website?url=https%3A%2F%2Fgraphalgos.com) ![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/danieljdupont/graph-algos/main)
+
+
 ![example of graph algos working](https://github.com/DanielJDupont/graph-algos/blob/main/public/bfs.gif?raw=true)
 
 ## Features
