@@ -50,6 +50,12 @@ export const Sidebar: React.FC = () => {
 
           <div>
             <div className={styles.tutorialText}>
+              Select the playback speed of the algorithm.
+            </div>
+          </div>
+
+          <div>
+            <div className={styles.tutorialText}>
               Select an algorithm and run.
             </div>
             <img
