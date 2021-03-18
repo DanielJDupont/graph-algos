@@ -2,12 +2,16 @@
   text-transform: none !important;
   color: white !important;
   background-color: #3b89da !important;
-  margin: 0 5px;
+  margin: 0 5px !important;
   width: 160px;
 
   &.buttonActive {
     background-color: #67aaf1 !important;
     font-weight: 600 !important;
+  }
+
+  &.buttonDisabled {
+    color: rgb(200, 200, 200) !important;
   }
 
   .icon {

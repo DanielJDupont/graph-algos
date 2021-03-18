@@ -88,7 +88,12 @@ export const StartAnimationButton: React.FC = () => {
 
   return (
     <Button
-      className={styles.button}
+      className={clsx(
+        styles.button,
+        (algorithmChoice === AlgorithmChoice.ChooseYourAlgorithm ||
+          isDisplayingAlgorithm) &&
+          styles.buttonDisabled
+      )}
       variant="contained"
       disabled={
         algorithmChoice === AlgorithmChoice.ChooseYourAlgorithm ||
