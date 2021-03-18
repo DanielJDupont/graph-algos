@@ -37,8 +37,9 @@ export const InputMatrix: React.FC = () => {
                     setSquareID(square.id, SET_SQUARE.END);
                   }
 
-                  // Click to remove individual blocked squares.
+                  // Click to add or remove walls.
                   else {
+                    if (square.id === startSquareID || endSquareID) return;
                     setMatrix(
                       matrix.map((row) =>
                         row.map((_square) => {
