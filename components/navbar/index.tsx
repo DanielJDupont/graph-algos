@@ -31,6 +31,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const Navbar: React.FC = () => {
   const { isDisplayingAlgorithm, width } = useContext(MatrixContext);
 
+  const classes = useStyles();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -66,7 +68,7 @@ export const Navbar: React.FC = () => {
           </Button>
           <Menu
             id="controlsMenu"
-            className={useStyles().menu}
+            className={classes.menu}
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
