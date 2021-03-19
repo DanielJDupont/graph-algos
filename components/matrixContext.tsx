@@ -145,7 +145,7 @@ const MatrixProvider = ({ children }) => {
     // Recursive Maze.
     if (value === MAZE_GENERATOR.RECURSIVE_MAZE) {
       // Make a maze entirely of walls.
-      const wallMatrix: Square[][] = [...Array(rowLength)].map((_, i) =>
+      let wallMatrix: Square[][] = [...Array(rowLength)].map((_, i) =>
         [...Array(colLength)].map((_, j) => {
           // If the current square is the start or end then do not wall it.
           if (i + ' ' + j === startSquareID || i + ' ' + j === endSquareID)
@@ -176,16 +176,66 @@ const MatrixProvider = ({ children }) => {
             if (wallMatrix[i][j].isBlocked) {
               // Get the count of paths surrounding this wall.
               const surroundingPathsCount =
-                Number(wallMatrix[i - 1][j].isBlocked) +
-                Number(wallMatrix[i][j + 1].isBlocked) +
-                Number(wallMatrix[i + 1][j].isBlocked) +
-                Number(wallMatrix[i][j - 1].isBlocked);
+                Number(!wallMatrix[i - 1][j].isBlocked) +
+                Number(!wallMatrix[i][j + 1].isBlocked) +
+                Number(!wallMatrix[i + 1][j].isBlocked) +
+                Number(!wallMatrix[i][j - 1].isBlocked);
 
               // This wall has only one path touching it, we can make this wall a path to extend the maze.
               if (surroundingPathsCount <= 1) {
                 // Change the square from a wall to a path.
+                wallMatrix = wallMatrix.map((row) =>
+                  row.map((square) => {
+                    if (square.id === i + ' ' + j)
+                      return {
+                        id: i + ' ' + j,
+                        isProcessed: false,
+                        isBlocked: false,
+                      };
+                    return square;
+                  })
+                );
+
+                const adjacentWalls = [];
+
                 // Add on the ids of the 4 surrounding squares to a list if they are walls.
+                if (wallMatrix[i - 1][j].isBlocked)
+                  adjacentWalls.push(wallMatrix[i - 1][j].id);
+
+                if (wallMatrix[i - 1][j].isBlocked)
+                  adjacentWalls.push(wallMatrix[i][j + 1].id);
+
+                if (wallMatrix[i - 1][j].isBlocked)
+                  adjacentWalls.push(wallMatrix[i + 1][j].id);
+
+                if (wallMatrix[i - 1][j].isBlocked)
+                  adjacentWalls.push(wallMatrix[i][j - 1].id);
+
                 // Randomly suffle the list of surrounding wall ids.
+                // Fisher-Yates / Knuth Shuffle.
+                const shuffleArray = (array) => {
+                  var currentIndex = array.length,
+                    temporaryValue,
+                    randomIndex;
+                  // While there remain elements to shuffle...
+                  while (0 !== currentIndex) {
+                    // Pick a remaining element...
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+                    // And swap it with the current element.
+                    temporaryValue = array[currentIndex];
+                    array[currentIndex] = array[randomIndex];
+                    array[randomIndex] = temporaryValue;
+                  }
+                  return array;
+                };
+                const directions = shuffleArray([
+                  'up',
+                  'right',
+                  'bottom',
+                  'left',
+                ]);
+                directions.forEach((direction) => direction);
                 // Append each wall id to the stack to continue the algorithm.
               }
 
