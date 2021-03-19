@@ -163,30 +163,66 @@ const MatrixProvider = ({ children }) => {
         })
       );
 
-      // Fisher-Yates (aka Knuth) Shuffle.
-      const shuffleArray = (array) => {
-        var currentIndex = array.length,
-          temporaryValue,
-          randomIndex;
+      const stack: number[][] = [];
+      stack.push([1, 1]);
 
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-          // Pick a remaining element...
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
+      while (stack.length > 0) {
+        const [i, j] = stack.pop();
 
-          // And swap it with the current element.
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
+        // Check to ensure that the current position is on the grid and within the first and last rows and columns.
+        if (i >= 1 && i < wallMatrix.length - 1) {
+          if (j >= 1 && j < wallMatrix[i].length - 1) {
+            // Only continue if this square is a wall, and this wall does not have 2 or more paths next to it.
+            if (wallMatrix[i][j].isBlocked) {
+              // Get the count of paths surrounding this wall.
+              const surroundingPathsCount =
+                Number(wallMatrix[i - 1][j].isBlocked) +
+                Number(wallMatrix[i][j + 1].isBlocked) +
+                Number(wallMatrix[i + 1][j].isBlocked) +
+                Number(wallMatrix[i][j - 1].isBlocked);
+
+              // This wall has only one path touching it, we can make this wall a path to extend the maze.
+              if (surroundingPathsCount <= 1) {
+                // Change the square from a wall to a path.
+                // Add on the ids of the 4 surrounding squares to a list if they are walls.
+                // Randomly suffle the list of surrounding wall ids.
+                // Append each wall id to the stack to continue the algorithm.
+              }
+
+              // // Fisher-Yates (aka Knuth) Shuffle.
+              // const shuffleArray = (array) => {
+              //   var currentIndex = array.length,
+              //     temporaryValue,
+              //     randomIndex;
+              //   // While there remain elements to shuffle...
+              //   while (0 !== currentIndex) {
+              //     // Pick a remaining element...
+              //     randomIndex = Math.floor(Math.random() * currentIndex);
+              //     currentIndex -= 1;
+              //     // And swap it with the current element.
+              //     temporaryValue = array[currentIndex];
+              //     array[currentIndex] = array[randomIndex];
+              //     array[randomIndex] = temporaryValue;
+              //   }
+              //   return array;
+              // };
+              // const directions = shuffleArray([
+              //   'up',
+              //   'right',
+              //   'bottom',
+              //   'left',
+              // ]);
+              // directions.forEach((direction) => direction);
+              // // Push on left, bottom, right, top.
+              // // This way items are popped off in order of top, right, bottom, left.
+              // stack.push([i, j - 1]);
+              // stack.push([i + 1, j]);
+              // stack.push([i, j + 1]);
+              // stack.push([i - 1, j]);
+            }
+          }
         }
-
-        return array;
-      };
-
-      const directions = shuffleArray(['up', 'right', 'bottom', 'left']);
-
-      directions.forEach((direction) => direction);
+      }
 
       setMatrix(wallMatrix);
     }
