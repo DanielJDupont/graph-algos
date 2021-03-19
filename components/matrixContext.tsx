@@ -104,7 +104,7 @@ const MatrixProvider = ({ children }) => {
   };
 
   const setMazeGenerator = (value: MAZE_GENERATOR) => {
-    // Clear
+    // Clear.
     if (value === MAZE_GENERATOR.CLEAR) {
       setMatrix(
         [...Array(rowLength)].map((_, i) =>
@@ -118,7 +118,7 @@ const MatrixProvider = ({ children }) => {
       );
     }
 
-    // Scatter
+    // Scatter.
     if (value === MAZE_GENERATOR.SCATTER) {
       setMatrix(
         [...Array(rowLength)].map((_, i) =>
@@ -142,49 +142,53 @@ const MatrixProvider = ({ children }) => {
       );
     }
 
-    // Recursive Maze
+    // Recursive Maze.
     if (value === MAZE_GENERATOR.RECURSIVE_MAZE) {
-      const mazedMatrix = [...Array(20)].map((_, i) =>
+      // Make a maze entirely of walls.
+      const wallMatrix: Square[][] = [...Array(rowLength)].map((_, i) =>
         [...Array(colLength)].map((_, j) => {
-          // Do depth first search in random directions, randomly pull from this list.
-          const directions = ['up', 'right', 'down', 'left'];
-          const direction = directions.splice(
-            Math.floor(Math.random() * directions.length),
-            1
-          );
+          // If the current square is the start or end then do not wall it.
+          if (i + ' ' + j === startSquareID || i + ' ' + j === endSquareID)
+            return {
+              id: i + ' ' + j,
+              isProcessed: false,
+              isBlocked: false,
+            };
+
           return {
             id: i + ' ' + j,
-            isVisited: false,
-            isWalled: false,
+            isProcessed: true,
+            isBlocked: true,
           };
         })
       );
 
-      // Do not think maps will work here. need to use a function call to create frames.
-      const recursiveMaze = (i, j) => {
-        // Fisher-Yates (aka Knuth) Shuffle
-        const shuffleArray = (array) => {
-          var currentIndex = array.length,
-            temporaryValue,
-            randomIndex;
+      // Fisher-Yates (aka Knuth) Shuffle.
+      const shuffleArray = (array) => {
+        var currentIndex = array.length,
+          temporaryValue,
+          randomIndex;
 
-          // While there remain elements to shuffle...
-          while (0 !== currentIndex) {
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
 
-            // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-          }
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
 
-          return array;
-        };
-
-        const directions = shuffleArray(['up', 'right', 'bottom', 'left']);
+        return array;
       };
+
+      const directions = shuffleArray(['up', 'right', 'bottom', 'left']);
+
+      directions.forEach((direction) => direction);
+
+      setMatrix(wallMatrix);
     }
 
     _setMazeGenerator(value);
