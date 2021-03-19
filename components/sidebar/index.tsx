@@ -46,12 +46,24 @@ export const Sidebar: React.FC = () => {
             <img src="walls.gif" />
           </div>
 
-          <div>Automatically generate mazes or clear all walls.</div>
+          <div>
+            <div className={styles.tutorialText}>
+              Automatically generate mazes or clear all walls.
+            </div>
+            <img
+              src="genMazeClear.gif"
+              style={{ width: '226px', height: '141px' }}
+            />
+          </div>
 
           <div>
             <div className={styles.tutorialText}>
               Select the playback speed of the algorithm.
             </div>
+            <img
+              src="playbackSpeed.gif"
+              style={{ width: '226px', height: '141px' }}
+            />
           </div>
 
           <div>
