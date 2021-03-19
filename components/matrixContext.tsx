@@ -181,8 +181,19 @@ const MatrixProvider = ({ children }) => {
                 Number(!wallMatrix[i + 1][j].isBlocked) +
                 Number(!wallMatrix[i][j - 1].isBlocked);
 
-              // This wall has only one path touching it, we can make this wall a path to extend the maze.
-              if (surroundingPathsCount <= 1) {
+              const adjacentIDs = [
+                wallMatrix[i - 1][j].id,
+                wallMatrix[i][j + 1].id,
+                wallMatrix[i + 1][j].id,
+                wallMatrix[i][j - 1].id,
+              ];
+
+              // This wall has only one path touching it, we can make this wall a path to extend the maze, allow paths to extend into paths that contain start or end points.
+              if (
+                surroundingPathsCount <= 1 ||
+                adjacentIDs.includes(startSquareID) ||
+                adjacentIDs.includes(endSquareID)
+              ) {
                 // Change the square from a wall to a path.
                 wallMatrix = wallMatrix.map((row) =>
                   row.map((square) => {
@@ -196,23 +207,22 @@ const MatrixProvider = ({ children }) => {
                   })
                 );
 
-                const adjacentWalls = [];
+                const adjacentWalls: string[] = [];
 
                 // Add on the ids of the 4 surrounding squares to a list if they are walls.
                 if (wallMatrix[i - 1][j].isBlocked)
                   adjacentWalls.push(wallMatrix[i - 1][j].id);
 
-                if (wallMatrix[i - 1][j].isBlocked)
+                if (wallMatrix[i][j + 1].isBlocked)
                   adjacentWalls.push(wallMatrix[i][j + 1].id);
 
-                if (wallMatrix[i - 1][j].isBlocked)
+                if (wallMatrix[i + 1][j].isBlocked)
                   adjacentWalls.push(wallMatrix[i + 1][j].id);
 
-                if (wallMatrix[i - 1][j].isBlocked)
+                if (wallMatrix[i][j - 1].isBlocked)
                   adjacentWalls.push(wallMatrix[i][j - 1].id);
 
-                // Randomly suffle the list of surrounding wall ids.
-                // Fisher-Yates / Knuth Shuffle.
+                // Randomly suffle the list of surrounding wall ids with Fisher-Yates / Knuth Shuffle.
                 const shuffleArray = (array) => {
                   var currentIndex = array.length,
                     temporaryValue,
@@ -229,50 +239,24 @@ const MatrixProvider = ({ children }) => {
                   }
                   return array;
                 };
-                const directions = shuffleArray([
-                  'up',
-                  'right',
-                  'bottom',
-                  'left',
-                ]);
-                directions.forEach((direction) => direction);
+
+                const adjacentWallsSuffled = shuffleArray(adjacentWalls);
+
+                adjacentWallsSuffled.forEach((squareID) =>
+                  stack.push([
+                    parseInt(squareID.split(' ')[0]),
+                    parseInt(squareID.split(' ')[1]),
+                  ])
+                );
                 // Append each wall id to the stack to continue the algorithm.
               }
-
-              // // Fisher-Yates (aka Knuth) Shuffle.
-              // const shuffleArray = (array) => {
-              //   var currentIndex = array.length,
-              //     temporaryValue,
-              //     randomIndex;
-              //   // While there remain elements to shuffle...
-              //   while (0 !== currentIndex) {
-              //     // Pick a remaining element...
-              //     randomIndex = Math.floor(Math.random() * currentIndex);
-              //     currentIndex -= 1;
-              //     // And swap it with the current element.
-              //     temporaryValue = array[currentIndex];
-              //     array[currentIndex] = array[randomIndex];
-              //     array[randomIndex] = temporaryValue;
-              //   }
-              //   return array;
-              // };
-              // const directions = shuffleArray([
-              //   'up',
-              //   'right',
-              //   'bottom',
-              //   'left',
-              // ]);
-              // directions.forEach((direction) => direction);
-              // // Push on left, bottom, right, top.
-              // // This way items are popped off in order of top, right, bottom, left.
-              // stack.push([i, j - 1]);
-              // stack.push([i + 1, j]);
-              // stack.push([i, j + 1]);
-              // stack.push([i - 1, j]);
             }
           }
         }
       }
+
+      // This algorithm leaves the start and end points full boxed in.
+      // Need to randomly remove 1 wall adjacent to the start point and the end point.
 
       setMatrix(wallMatrix);
     }
